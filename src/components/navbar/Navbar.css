@@ -1,0 +1,64 @@
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+.navbar {
+  background-color: #94b2ff;
+  width: 100%;
+  height: 8vh;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+}
+
+.navbar-companyname {
+  margin: 30px;
+  font-weight: 800;
+  font-size: xx-large;
+  font-family: "Inter", sans-serif;
+}
+
+.navbar-links {
+  margin-left: 10px;
+  display: flex;
+  font-weight: 500;
+  gap:5px;
+}
+
+.navbar-links > div {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.navbar-search {
+  background-color: #94b2ff;
+  border: 2px solid white;
+  height: 35px;
+  width: 350px;
+  border-radius: 5px;
+  color: white;
+  padding-left: 15px;
+}
+
+.navbar-search::placeholder {
+  color: white;
+
+  font-weight: 500;
+}
+
+.navbar-search:focus {
+  outline: none;
+}
+
+.navbar-profile {
+  margin-inline: 25px;
+  cursor: pointer;
+}
