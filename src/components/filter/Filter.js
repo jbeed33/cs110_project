@@ -108,23 +108,34 @@ const formData = [
 ];
 
 function FormNode(props) {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <>
+      {props.node.key.length == 1 ? (
+        <h2
+          class="filter-form-group"
+          onClick={() => setIsOpen((prevOpen) => !prevOpen)}
+        >
+          {props.node.label}
+        </h2>
+      ) : null}
       <ul>
         {props.node.children !== undefined
           ? props.node.children.map((node, i) => {
               return (
-                <div className="filter-form-group-options">
-                  <input
-                    id={node.label + i}
-                    type="checkbox"
-                    name={node.label}
-                    value={node.label}
-                  />
-                  <label for={node.label + i}>{node.label}</label>
+                isOpen && (
+                  <div className="filter-form-group-options">
+                    <input
+                      id={node.label + i}
+                      type="checkbox"
+                      name={node.label}
+                      value={node.label}
+                    />
+                    <label for={node.label + i}>{node.label}</label>
 
-                  <FormNode node={node} key={node.key} />
-                </div>
+                    <FormNode node={node} key={node.key} />
+                  </div>
+                )
               );
             })
           : null}
@@ -139,7 +150,6 @@ function Form(props) {
       {props.formData.map((node) => {
         return (
           <>
-            <h2 class="filter-form-group">{node.label}</h2>
             <FormNode node={node} key={node.key} />
           </>
         );
