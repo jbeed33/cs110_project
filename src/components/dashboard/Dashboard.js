@@ -1,10 +1,13 @@
 import React from "react";
 import "./Dashboard.css";
+import Filter from "../filter/Filter";
 
 function Dashboard() {
   return (
     <div id="dashboard">
-      <div id="dashboard-form-container">This is where the form goes</div>
+      <div id="dashboard-form-container">
+        <Filter />
+      </div>
       <div id="dashboard-student-list-container">
         <h1>Recommended Students</h1>
         <div id="student-list">

@@ -1,0 +1,63 @@
+#filter-container {
+  border-right: 3px solid #94b2ff;
+  height: 90vh;
+  overflow-y: scroll;
+}
+
+#filter-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+#filter-header-icon {
+  width: 40px;
+  color: #94b2ff;
+}
+
+#filter-header-title {
+  font-size: 2rem;
+  color: #94b2ff;
+}
+
+form {
+  width: 85%;
+  padding-left: 20px;
+}
+
+form > * {
+  font-size: 16px;
+}
+
+.filter-form-group {
+  width: 100%;
+  font-size: 20px;
+  color: #94b2ff;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-form-group-options {
+  position: relative;
+  left: -20px;
+  width: 120%;
+  font-size: 16px;
+  color: rgb(78, 76, 76);
+  padding-bottom: 5px;
+  display: flex;
+}
+
+input {
+  accent-color: #94b2ff;
+  border: 2px solid #94b2ff;
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+  border-color: #94b2ff;
+}
+
+label {
+  font-size: 18px;
+  font-weight: 300;
+}
