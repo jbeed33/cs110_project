@@ -111,3 +111,22 @@
   left: 38px;
   color: #94b2ff;
 }
+
+/*  Form/Filter  */
+#form-title{
+  color: #94b2ff;
+  text-align: center;
+}
+.filter-category {
+  padding: 10px;
+}
+.filter-section {
+  color: #94b2ff;
+  font-weight: bolder;
+}
+.filter-option {
+  margin: 5px 0 0 20px;
+}
+.filter-text {
+  margin-left: 10px;
+}
