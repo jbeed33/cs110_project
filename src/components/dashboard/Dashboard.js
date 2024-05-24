@@ -30,7 +30,7 @@ function Dashboard() {
           <span class="filter-text">Bachelor's Degree</span><br></br>
           <input type="checkbox" class="filter-option" name="qualifications" value="masters"></input>
           <span class="filter-text">Master's Degree</span><br></br>
-          <input type="checkbox" class="filter-option" name="qualifications" value="doctors"></input>
+          <input type="checkbox" class="filter-option" name="qualifications" value="phd"></input>
           <span class="filter-text">PhD</span><br></br>
         </form>
         <form class="filter-category">
