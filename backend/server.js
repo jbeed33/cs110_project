@@ -4,6 +4,7 @@ const app = express();
 const port = 3000;
 const UserRoutes = require("./routes/UserRoutes");
 const AdminRoutes = require("./routes/AdminRoutes");
+const FilterRoutes = require("./routes/FilterRoutes");
 const bodyParser = require("body-parser");
 const uri =
   "mongodb+srv://joshua:beed1234@cluster0.ibmwof6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
@@ -16,10 +17,7 @@ app.use(bodyParser.json());
 //Middleware Routes
 app.use("/api/user", UserRoutes); // Break up routes for seperate files.
 app.use("/api/admin", AdminRoutes); // Break up routes for seperate files.
-
-app.get("/", function (req, res) {
-  res.send("Hello World");
-});
+app.use("/api/filter", FilterRoutes); // Break up routes for seperate files.
 
 app.listen(port, () => {
   connectToDB()
