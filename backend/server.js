@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const app = express();
 const port = 8080;
+const cors = require("cors");
 const UserRoutes = require("./routes/UserRoutes");
 const AdminRoutes = require("./routes/AdminRoutes");
 const AuthRoutes = require("./routes/AuthRoutes");
@@ -19,6 +20,8 @@ const AuthControl = require("./controllers/AuthController");
 const uri = `mongodb+srv://joshua:${process.env.DB_PASSWORD}@cluster0.ibmwof6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 //Middleware
+
+app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -44,16 +47,16 @@ app.use("/api/auth", AuthRoutes); // Break up routes for seperate files.
 //Test the authenticate middleware
 app.get("/", AuthControl.authenticate, (req, res) => {
   const userId = req.userId || null;
-  res.send(process.env.HELLO);
+  res.send("This is the userId: ", userId);
 });
-
 
 //redirect for google auth
 app.get(
   "/auth/google/redirect",
   passport.authenticate("google"),
   (req, res) => {
-    res.send(req.user);
+    // TO DO: should redirect to the signup page or the dashboard depending on if the user is already a user or not.
+    res.redirect("http://localhost:8080");
   }
 );
 
