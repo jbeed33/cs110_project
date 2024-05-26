@@ -6,6 +6,8 @@ const port = 8080;
 const UserRoutes = require("./routes/UserRoutes");
 const AdminRoutes = require("./routes/AdminRoutes");
 const AuthRoutes = require("./routes/AuthRoutes");
+
+const FilterRoutes = require("./routes/FilterRoutes");
 const bodyParser = require("body-parser");
 const passportSetup = require("./config/passport-setup");
 const session = require("express-session");
@@ -36,6 +38,7 @@ app.use(passport.session());
 //Middleware Routes
 app.use("/api/user", UserRoutes); // Break up routes for seperate files.
 app.use("/api/admin", AdminRoutes); // Break up routes for seperate files.
+app.use("/api/filter", FilterRoutes); // Break up routes for seperate files.
 app.use("/api/auth", AuthRoutes); // Break up routes for seperate files.
 
 //Test the authenticate middleware
@@ -43,6 +46,7 @@ app.get("/", AuthControl.authenticate, (req, res) => {
   const userId = req.userId || null;
   res.send(process.env.HELLO);
 });
+
 
 //redirect for google auth
 app.get(
