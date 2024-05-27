@@ -24,11 +24,18 @@ async function deleteUser(userId) {
 
 async function updateUser(userId, updatedUser) {
   const filter = { userId };
-  const update = { updatedUser };
 
-  const doc = await User.findOneAndUpdate(filter, update, {
+  const user = await User.findOneAndUpdate(filter, updatedUser, {
     new: true,
   });
+
+  console.log(user);
+
+  if (user) {
+    return user;
+  } else {
+    return null;
+  }
 }
 
 async function createUser(user) {
