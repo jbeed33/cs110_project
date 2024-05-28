@@ -48,6 +48,8 @@ router.put("/:userId", async (req, res) => {
   try {
     let userId = req.params.userId;
     let result = await userController.updateUser(userId, req.body);
+    console.log(userId)
+    console.log(result);
     if (result === null || result === undefined) {
       return res.status(404).send("Could not update user. Please try again");
     }
