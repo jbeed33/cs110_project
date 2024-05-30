@@ -1,14 +1,24 @@
+body {
+    background-color: rgb(85, 164, 218);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 #signup-container {
     background-color: white;
-    border: 2px solid black;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 0 10px 1px rgb(124, 124, 124);
     color: black;
     font-size: large;
     margin: 20px;
-    padding: 30px;
+    margin-top: 50px;
+    padding: 50px;
     width: auto;
     min-width: 300px;
     max-width: 500px;
     height: 350px;
+    align-self: center;
 }
 #signup-head {
     text-align: center;
@@ -23,7 +33,7 @@
 }
 .form-content {
     display: flex;
-    gap: 20px;
+    gap: 30px;
 }
 .signup-left, .signup-right {
     flex-direction: column;
@@ -49,6 +59,7 @@
     width: 150px;
     align-self: center;
     margin: 5px;
+    margin-top: 10px;
     padding: 5px;
     border: none;
     border-radius: 20px;
@@ -62,6 +73,8 @@
 }
 .form-text {
     font-size: 13px;
+    font-weight: bold;
+    color: rgb(83, 83, 83);
 }
 #form-grade, #form-field-stidy, #form-subject-help {
     margin: 5px 0 5px 0;

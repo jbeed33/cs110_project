@@ -6,8 +6,6 @@ import SignUp from "./components/signUp/SignUp";
 function App() {
   return (
     <div className="App">
-      <Navbar />
-      <Dashboard />
       <SignUp />
     </div>
   );
