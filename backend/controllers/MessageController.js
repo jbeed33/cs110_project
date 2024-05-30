@@ -48,7 +48,7 @@ async function retrieveMessagesOfGroup(groupId) {
   console.log("called retrieve message");
   if (groupId) {
     let groupMessages = await GroupModel.findById(groupId);
-    return groupMessages.messageGroups;
+    return groupMessages.messages;
   } else {
     return null;
   }
