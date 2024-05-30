@@ -60,6 +60,15 @@ async function createUser(user) {
   }
 }
 
+async function getGroupIds(userId) {
+  if (userId) {
+    let foundUser = await User.findOne({ userId: userId });
+    return foundUser;
+  } else {
+    return null;
+  }
+}
+
 module.exports = {
   getUser,
   createUser,

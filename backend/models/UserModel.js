@@ -38,6 +38,8 @@ const userSchema = new Schema({
     type: String,
     maxlength: 300,
   },
+  messageGroups: [],
+
 });
 
 module.exports = mongoose.model("user", userSchema, "users");
