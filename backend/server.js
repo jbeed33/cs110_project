@@ -56,9 +56,16 @@ app.get("/", AuthControl.authenticate, (req, res) => {
 app.get(
   "/auth/google/redirect",
   passport.authenticate("google"),
+  AuthControl.authenticate,
   (req, res) => {
     // TO DO: should redirect to the signup page or the dashboard depending on if the user is already a user or not.
-    res.redirect("http://localhost:8080");
+   if(req.newUser === true){
+     res.redirect("http://localhost:3000/signup");
+   }
+   else{
+    res.redirect("http://localhost:3000");
+   }
+    
   }
 );
 
