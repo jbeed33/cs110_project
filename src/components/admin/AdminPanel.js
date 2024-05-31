@@ -1,3 +1,4 @@
+import Navbar from "../navbar/Navbar";
 import "./Admin.css";
 
 import UserCard from "./UserCard";
@@ -7,7 +8,6 @@ import { useState, useEffect } from "react";
 export default function AdminPanel() {
   const [data, setData] = useState([]);
   const [signal, setSignal] = useState(0);
-  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,6 +20,7 @@ export default function AdminPanel() {
 
   return (
     <div>
+      <Navbar />
       <div className="admin-panel-heading">Administrator Panel</div>
       <div className="usercard-grid">
         {data.map((entry, i) => (
