@@ -26,7 +26,7 @@ router.get("/", AuthController.authenticate, async (req, res) => {
 });
 
 // Admin can delete a user.
-router.delete("/:userId", async (req, res) => {
+router.delete("/:userId", AuthController.authenticate, async (req, res) => {
   try {
     let userId = req.params.userId;
     console.log(userId);
@@ -46,7 +46,7 @@ router.delete("/:userId", async (req, res) => {
 });
 
 // Admin can edit a user.
-router.put("/:userId", async (req, res) => {
+router.put("/:userId", AuthController.authenticate, async (req, res) => {
   try {
     let userId = req.params.userId;
     let result = await userController.updateUser(userId, req.body);

@@ -11,10 +11,10 @@ async function authenticate(req, res, next) {
       return next(); // continue to next middleware or function
     } else {
       //The user id did not appear in the database.
-      return res.redirect("http://localhost:3000/login");
+      return res.redirect("http://localhost:3000/");
     }
   } else {
-    return res.send("Unauthenticated");
+    return res.json({ msg: "Unauthorized" });
   }
 }
 

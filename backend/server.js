@@ -80,7 +80,7 @@ app.get(
     console.log("user authencation: ", req.isAuthenticated());
     if (req.newUser === true) {
       res.redirect("http://localhost:3000/signup");
-    } else if (req.newUser) {
+    } else if (req.isAuthenticated()) {
       res.redirect("http://localhost:3000/dashboard");
     } else {
       res.redirect("http://localhost:3000");
