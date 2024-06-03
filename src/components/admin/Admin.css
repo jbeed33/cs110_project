@@ -1,0 +1,11 @@
+.admin-panel-heading{
+    margin: 20px;
+    font-weight: 700;
+    font-size: 20px;
+}
+.usercard-grid{
+    margin: 20px;
+    display:flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
