@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const app = express();
 const port = 8080;
+const MongoStore = require("connect-mongo");
 const cors = require("cors");
 const UserRoutes = require("./routes/UserRoutes");
 const AdminRoutes = require("./routes/AdminRoutes");
@@ -22,7 +23,12 @@ const uri = `mongodb+srv://joshua:${process.env.DB_PASSWORD}@cluster0.ibmwof6.mo
 
 //Middleware
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -30,8 +36,13 @@ app.use(
   session({
     secret: process.env.COOKIE_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: { secure: false },
+    store: MongoStore.create({
+      mongoUrl: uri,
+      collectionName: "sessions",
+      dbName: "cs110_project_db",
+    }),
   })
 );
 
@@ -47,22 +58,32 @@ app.use("/api/auth", AuthRoutes); // Break up routes for seperate files.
 app.use("/api/chat", ChatRoutes); // Break up routes for seperate files.
 
 //Test the authenticate middleware
-app.get("/", AuthControl.authenticate, (req, res) => {
-  const userId = req.userId || null;
-  res.send("This is the userId: ", userId);
+app.get("/", (req, res) => {
+  const userId = req.session || null;
+  res.send("This is the userId: " + JSON.stringify(userId));
+});
+
+app.get("/test", (req, res) => {
+  const userId = req.session || null;
+  res.send("This is the userId: " + JSON.stringify(userId));
 });
 
 //redirect for google auth
 app.get(
   "/auth/google/redirect",
   passport.authenticate("google"),
-  AuthControl.authenticate,
   (req, res) => {
     // TO DO: should redirect to the signup page or the dashboard depending on if the user is already a user or not.
+    console.log("Called redirect");
+    console.log(req.user.id);
+    console.log(req.session);
+    console.log("user authencation: ", req.isAuthenticated());
     if (req.newUser === true) {
       res.redirect("http://localhost:3000/signup");
-    } else {
+    } else if (req.newUser) {
       res.redirect("http://localhost:3000/dashboard");
+    } else {
+      res.redirect("http://localhost:3000");
     }
   }
 );

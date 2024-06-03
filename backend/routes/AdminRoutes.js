@@ -4,8 +4,10 @@ let adminController = require("../controllers/AdminController");
 
 let router = express.Router();
 
+const AuthController = require("../controllers/AuthController");
+
 // Admin can get all users.
-router.get("/", async (req, res) => {
+router.get("/", AuthController.authenticate, async (req, res) => {
   try {
     // TO DO: cookies will be used for authentication
     let user = await adminController.getAllUsers();
@@ -48,7 +50,7 @@ router.put("/:userId", async (req, res) => {
   try {
     let userId = req.params.userId;
     let result = await userController.updateUser(userId, req.body);
-    console.log(userId)
+    console.log(userId);
     console.log(result);
     if (result === null || result === undefined) {
       return res.status(404).send("Could not update user. Please try again");
