@@ -45,7 +45,7 @@ async function createUser(user) {
   }
   try {
     await User.create({
-      userId: user.userId,
+      userId: "Joseph1j3ioj",
       userName: user.userName,
       grade: user.grade,
       type: user.type,
@@ -53,9 +53,11 @@ async function createUser(user) {
       options: user.options,
       field: user.field,
       description: user.description,
+      subjectHelp: user.subjectHelp,
     });
     return "User Created";
   } catch (e) {
+    console.log(e)
     return null;
   }
 }
