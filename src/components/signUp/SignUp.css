@@ -76,6 +76,6 @@ body {
     font-weight: bold;
     color: rgb(83, 83, 83);
 }
-#form-grade, #form-field-stidy, #form-subject-help {
+#form-grade, #form-field-stidy, #form-subject-help #form-school {
     margin: 5px 0 5px 0;
 }
