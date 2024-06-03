@@ -2,7 +2,7 @@ const AuthModel = require("../models/AuthModel");
 
 async function authenticate(req, res, next) {
   console.log("user authentication: ", req.isAuthenticated());
-  if (req.isAuthenticated()) {
+  if (req.isAuthenticated() && !disableAuth) {
     const authId = req.user;
     user = await AuthModel.findById(authId);
 
