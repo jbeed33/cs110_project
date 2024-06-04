@@ -43,7 +43,6 @@ const userSchema = new Schema({
     required: true,
   },
   messageGroups: [],
-
 });
 
 module.exports = mongoose.model("user", userSchema, "users");

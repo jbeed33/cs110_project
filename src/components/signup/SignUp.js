@@ -3,6 +3,50 @@ import Navbar from "../navbar/Navbar";
 import "./SignUp.css"
 
 export default function SignUp() {
+  
+  async function submit(event) {
+  event.preventDefault(); // Prevent the form from submitting the default way
+
+  const formEl = document.getElementById("form");
+
+  const formData = new FormData(formEl);
+
+  const dataToBeSubmitted = {
+    userName: formData.get("userName"),
+    grade: formData.get("grade"),
+    field: formData.get("field"),
+    options: formData.get("option"),
+    type: formData.get("type"),
+    school: formData.get("school"),
+    subjectHelp: formData.get("subjectHelp"),
+    description: formData.get("description"),
+    type: formData.get("type"),
+  };
+
+  console.log(dataToBeSubmitted);
+
+  //console.log(formData);
+
+  fetch("http://localhost:8080/api/user", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include", // Include credentials in the request
+    body: JSON.stringify({
+      ...dataToBeSubmitted,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+      window.location.href = "http://localhost:3000/dashboard";
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      // Handle errors
+    });
+}
 
   return (
     <>
@@ -88,10 +132,14 @@ export default function SignUp() {
                             <input type="text" name="description" className="signup-description"></input>
                         </div>
                     </div>
-                    <button class="form-btn">Submit</button>
+                      <button class="form-btn" onClick={(e) => submit(e)}>
+                         Submit
+                     </button>
                 </form>
             </div>
         </div>
     </>
   );
 }
+
+export default SignUp;

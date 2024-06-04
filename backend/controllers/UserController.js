@@ -38,14 +38,15 @@ async function updateUser(userId, updatedUser) {
   }
 }
 
-async function createUser(user) {
+async function createUser(user, userID) {
   console.log(user);
   if (user === null) {
     return null;
   }
   try {
     await User.create({
-      userId: "Joseph1j3ioj",
+
+      userId: userID,
       userName: user.userName,
       grade: user.grade,
       type: user.type,
@@ -57,7 +58,7 @@ async function createUser(user) {
     });
     return "User Created";
   } catch (e) {
-    console.log(e)
+    console.error(e);
     return null;
   }
 }

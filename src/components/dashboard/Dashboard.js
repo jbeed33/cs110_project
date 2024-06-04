@@ -4,13 +4,14 @@ import Navbar from "../navbar/Navbar";
 
 function Dashboard() {
   // State for filter data
+
   const [filterData, setFilterData] = useState([]);
+
 
   // Handle changes in filter inputs.
   const handleChange = (e) => {
     const {name, value} = e.target;
     const filterString = `${name}=${value}`;
-
     console.log(e.target.checked);
     console.log(filterString)
     if(e.target.checked === true){
@@ -35,7 +36,6 @@ function Dashboard() {
 
   // Handle form submission
   const handleSubmit = (e) => {
-  
     e.preventDefault();
     // able to send filterData to backend or do actions
     console.log('Form submitted:', filterData);

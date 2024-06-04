@@ -1,9 +1,10 @@
 let express = require("express");
 let filterController = require("../controllers/FilterController");
+const AuthController = require("../controllers/AuthController");
 
 let router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", AuthController.authenticate, async (req, res) => {
   //Must have filters added to use this route.
   if (Object.keys(req.query).length === 0) {
     return res

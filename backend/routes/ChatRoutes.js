@@ -3,8 +3,10 @@ let router = express.Router();
 let MessageController = require("../controllers/MessageController");
 let UserController = require("../controllers/UserController");
 
+const AuthController = require("../controllers/AuthController");
+
 //create chat group
-router.post("/group", async (req, res) => {
+router.post("/group", AuthController.authenticate, async (req, res) => {
   try {
     const sender = req.body.sender;
     const receiver = req.body.receiver;
@@ -31,10 +33,10 @@ router.post("/group", async (req, res) => {
 });
 
 //leave chat group
-router.delete("/group", (req, res) => {});
+router.delete("/group", AuthController.authenticate, (req, res) => {});
 
 //get chat blurbs that user is apart of
-router.get("/group/:userId", async (req, res) => {
+router.get("/group/:userId", AuthController.authenticate, async (req, res) => {
   let userId = req.params.userId;
   const user = await UserController.getUser(userId);
   const userGroups = user.messageGroups;
@@ -74,44 +76,52 @@ router.get("/group/:userId", async (req, res) => {
 });
 
 // retrieve all messages from chat group
-router.get("/messages/:groupId", async (req, res) => {
-  try {
-    const messages = await MessageController.retrieveMessagesOfGroup(
-      req.params.groupId
-    );
-    res.status(200).json(messages);
-  } catch (error) {
-    console.error(
-      "An error occurred when posting message. Please try again",
-      error
-    );
-    return res.status(500).send("An error occurred. Please try again");
+router.get(
+  "/messages/:groupId",
+  AuthController.authenticate,
+  async (req, res) => {
+    try {
+      const messages = await MessageController.retrieveMessagesOfGroup(
+        req.params.groupId
+      );
+      res.status(200).json(messages);
+    } catch (error) {
+      console.error(
+        "An error occurred when posting message. Please try again",
+        error
+      );
+      return res.status(500).send("An error occurred. Please try again");
+    }
   }
-});
+);
 
 //create message on a chat group
-router.post("/messages/:groupId", async (req, res) => {
-  try {
-    const groupId = req.params.groupId;
-    const sender = req.body.sender;
-    const receiver = req.body.receiver;
-    const message = req.body.message;
+router.post(
+  "/messages/:groupId",
+  AuthController.authenticate,
+  async (req, res) => {
+    try {
+      const groupId = req.params.groupId;
+      const sender = req.body.sender;
+      const receiver = req.body.receiver;
+      const message = req.body.message;
 
-    let confirmation = await MessageController.addMessageToChatGroup(
-      message,
-      groupId,
-      sender,
-      receiver
-    );
-    console.log(confirmation);
-    res.status(201).json(confirmation);
-  } catch (error) {
-    console.error(
-      "An error occurred when posting message. Please try again",
-      error
-    );
-    return res.status(500).send("An error occurred. Please try again");
+      let confirmation = await MessageController.addMessageToChatGroup(
+        message,
+        groupId,
+        sender,
+        receiver
+      );
+      console.log(confirmation);
+      res.status(201).json(confirmation);
+    } catch (error) {
+      console.error(
+        "An error occurred when posting message. Please try again",
+        error
+      );
+      return res.status(500).send("An error occurred. Please try again");
+    }
   }
-});
+);
 
 module.exports = router;

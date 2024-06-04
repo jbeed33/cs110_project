@@ -11,7 +11,9 @@ export default function AdminPanel() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("http://localhost:8080/api/admin");
+      const res = await fetch("http://localhost:8080/api/admin", {
+        credentials: "include",
+      });
       const temp = await res.json();
       setData(temp);
     };
