@@ -1,10 +1,11 @@
 let express = require("express");
 let userController = require("../controllers/UserController");
 let authController = require("../controllers/AuthController");
+const AuthController = require("../controllers/AuthController");
 
 let router = express.Router();
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", AuthController.authenticate, async (req, res) => {
   try {
     let userId = req.params.id;
     console.log(userId);
@@ -23,7 +24,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", AuthController.authenticate, async (req, res) => {
   try {
     let userId = req.params.id;
     console.log(userId);
@@ -42,7 +43,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", AuthController.authenticate, async (req, res) => {
   try {
     console.log(req.body);
     let result = await userController.updateUser(req.params.id, req.body);
@@ -56,7 +57,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", AuthController.authenticate, async (req, res) => {
   try {
     let newUser = req.body;
     // TO DO: Need to check if user already exists, id will be passed by cookie
