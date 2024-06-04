@@ -27,7 +27,7 @@ const userSchema = new Schema({
   },
   options: {
     type: String,
-    enum: ["remote", "in person", "both"],
+    enum: ["remote", "in-person", "both"],
     required: true,
   },
   field: {
@@ -43,7 +43,6 @@ const userSchema = new Schema({
     required: true,
   },
   messageGroups: [],
-
 });
 
 module.exports = mongoose.model("user", userSchema, "users");

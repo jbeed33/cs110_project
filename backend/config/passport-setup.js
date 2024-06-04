@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require("uuid");
 
 passport.serializeUser((user, done) => {
   console.log("serialized user");
-  user.firstTime = user.newUser ? user.newUser : false;
+  user.firstTime = user.newUser ? true : false;
   console.log(user);
   console.log(user.id);
 
@@ -51,6 +51,8 @@ passport.use(
           userId: uuidv4(),
           image: profile.photos[0].value,
         });
+
+        newUser.newUser = true;
         console.log("Created new user");
         done(null, newUser);
       }

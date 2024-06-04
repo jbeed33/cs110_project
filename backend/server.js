@@ -77,10 +77,11 @@ app.get(
     console.log("Called redirect");
     console.log(req.user.id);
     console.log(req.session);
+    console.log("First time: ", req.user.firstTime);
     console.log("user authencation: ", req.isAuthenticated());
-    if (req.newUser === true) {
+    if (req.isAuthenticated() && req.user.firstTime === true) {
       res.redirect("http://localhost:3000/signup");
-    } else if (req.isAuthenticated()) {
+    } else if (req.isAuthenticated() && req.user.firstTime === false) {
       res.redirect("http://localhost:3000/dashboard");
     } else {
       res.redirect("http://localhost:3000");
