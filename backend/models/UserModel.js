@@ -38,6 +38,10 @@ const userSchema = new Schema({
     type: String,
     maxlength: 300,
   },
+  subjectHelp: {
+    type: String,
+    required: true,
+  },
   messageGroups: [],
 
 });
