@@ -1,10 +1,9 @@
 import "./App.css";
 import Navbar from "./components/navbar/Navbar";
 import Dashboard from "./components/dashboard/Dashboard";
-import SignUp from "./components/signUp/SignUp"
-import Login from './components/login/Login';
+import SignUp from "./components/signup/SignUp";
+import Login from "./components/login/Login";
 import AdminPanel from "./components/admin/AdminPanel";
-
 
 function App() {
   return (
