@@ -45,6 +45,7 @@ async function createUser(user, userID) {
   }
   try {
     await User.create({
+
       userId: userID,
       userName: user.userName,
       grade: user.grade,
