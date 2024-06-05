@@ -5,12 +5,23 @@ async function filter(filters) {
   return users;
 }
 
+async function recommendationFilter(userID) {
+  console.log("user id: ", userID);
+  const user = await User.findOne({ userId: userID });
+
+  console.log(user);
+
+  const filters = {
+    field: user.subjectHelp,
+    type: ["both", "student", "tutor"],
+  };
+
+  const users = await User.find(filters);
+  console.log(users);
+  return users;
+}
+
 module.exports = {
   filter,
+  recommendationFilter,
 };
-
-// async function recommendationFilter(filters){
-//     const filters = req.query;
-//     const users = await User.find(filters);
-//     res.json(users);
-// }

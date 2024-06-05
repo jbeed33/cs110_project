@@ -14,12 +14,12 @@ function Dashboard() {
   const [signal, setSignal] = useState(0);
 
   const getUsers = async () => {
-    if (
-      searchUrl === "http://localhost:8080/api/filter?" ||
-      searchUrl === "http://localhost:8080/api/filter"
-    ) {
-      return;
-    }
+    // if (
+    //   searchUrl === "http://localhost:8080/api/filter?" ||
+    //   searchUrl === "http://localhost:8080/api/filter"
+    // ) {
+    //   return;
+    // }
     const res = await fetch(searchUrl, {
       credentials: "include",
     });

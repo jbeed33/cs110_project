@@ -7,9 +7,8 @@ let router = express.Router();
 router.get("/", AuthController.authenticate, async (req, res) => {
   //Must have filters added to use this route.
   if (Object.keys(req.query).length === 0) {
-    return res
-      .status(200)
-      .send({ message: "Please add a filter to use this route." });
+    const users = await filterController.recommendationFilter(req.userId);
+    return res.json(users);
   }
 
   try {
