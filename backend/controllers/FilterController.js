@@ -1,6 +1,9 @@
 const User = require("../models/UserModel");
 
-async function filter(filters) {
+async function filter(filters, userID) {
+  //making sure we do not return the current user
+  filters.userId = { $ne: userID };
+
   const users = await User.find(filters);
   return users;
 }
@@ -13,6 +16,7 @@ async function recommendationFilter(userID) {
 
   const filters = {
     field: user.subjectHelp,
+    userId: { $ne: user.userId },
     type: ["both", "student", "tutor"],
   };
 

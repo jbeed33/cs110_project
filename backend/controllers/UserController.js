@@ -39,14 +39,12 @@ async function updateUser(userId, updatedUser) {
 }
 
 async function createUser(user, userID) {
-async function createUser(user, userID) {
   console.log(user);
   if (user === null) {
     return null;
   }
   try {
     await User.create({
-
       userId: userID,
       userName: user.userName,
       grade: user.grade,

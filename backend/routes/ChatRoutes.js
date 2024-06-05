@@ -36,43 +36,48 @@ router.post("/group", AuthController.authenticate, async (req, res) => {
 router.delete("/group", AuthController.authenticate, (req, res) => {});
 
 //get chat blurbs that user is apart of
-router.get("/group/:userId", AuthController.authenticate, async (req, res) => {
-  let userId = req.params.userId;
+router.get("/group", AuthController.authenticate, async (req, res) => {
+  let userId = req.userId;
   const user = await UserController.getUser(userId);
   const userGroups = user.messageGroups;
 
-  let newUserGroupPromises = userGroups.map(async (groupId) => {
-    let group = await MessageController.retrieveGroup(groupId);
-    return group;
-  });
-
-  let newUserGroups = await Promise.all(newUserGroupPromises);
-
-  let finalUserGroups = newUserGroups.map(async (group) => {
-    const textMate = group.users.find((user) => {
-      return userId != user;
+  try {
+    let newUserGroupPromises = userGroups.map(async (groupId) => {
+      let group = await MessageController.retrieveGroup(groupId);
+      return group;
     });
 
-    let textMateUser = await UserController.getUser(textMate);
+    let newUserGroups = await Promise.all(newUserGroupPromises);
 
-    textMateUser = {
-      userId: textMateUser.userId,
-      userImage: textMateUser.image || null,
-      userName: textMateUser.userName,
-    };
+    let finalUserGroups = newUserGroups.map(async (group) => {
+      //Text mate refers to the person in which the user is chatting with.
+      const textMate = group.users.find((user) => {
+        return userId != user;
+      });
 
-    const lastMsg = group.lastMessage;
+      let textMateUser = await UserController.getUser(textMate);
 
-    return {
-      textPartner: textMateUser,
-      lastMessage: lastMsg,
-      chatId: group._id,
-    };
-  });
+      textMateUser = {
+        userId: textMateUser.userId,
+        userImage: textMateUser.image || null,
+        userName: textMateUser.userName,
+      };
 
-  finalUserGroups = await Promise.all(finalUserGroups);
+      const lastMsg = group.lastMessage;
 
-  res.status(200).json({ userGroups: finalUserGroups });
+      return {
+        chatPartner: textMateUser,
+        lastMessage: lastMsg,
+        chatId: group._id,
+      };
+    });
+
+    finalUserGroups = await Promise.all(finalUserGroups);
+
+    res.status(200).json({ userGroups: finalUserGroups });
+  } catch (error) {
+    console.error("Error Occured", error);
+  }
 });
 
 // retrieve all messages from chat group

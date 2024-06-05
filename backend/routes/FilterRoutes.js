@@ -14,9 +14,10 @@ router.get("/", AuthController.authenticate, async (req, res) => {
   try {
     const filters = req.query;
     console.log(filters);
-    const users = await filterController.filter(filters);
+    const users = await filterController.filter(filters, req.userId);
     return res.json(users);
   } catch (error) {
+    console.error(error);
     return res.status(500).send(error.message);
   }
 });
