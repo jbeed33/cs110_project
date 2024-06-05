@@ -27,7 +27,7 @@ const userSchema = new Schema({
   },
   options: {
     type: String,
-    enum: ["remote", "in-person", "both"],
+    enum: ["online", "in person", "both"],
     required: true,
   },
   field: {

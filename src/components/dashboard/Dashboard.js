@@ -29,7 +29,7 @@ function Dashboard() {
   };
 
   useEffect(() => {
-      getUsers();
+    getUsers();
   }, [searchUrl]);
 
   useEffect(() => {
@@ -93,7 +93,7 @@ function Dashboard() {
               type="checkbox"
               class="filter-option"
               name="options"
-              value="in-person"
+              value="in person"
               onChange={handleChange}
             ></input>
             <span class="filter-text">In-Person</span>
@@ -106,7 +106,7 @@ function Dashboard() {
               type="checkbox"
               class="filter-option"
               name="field"
-              value="agricultre-and-natural-resources"
+              value="agricultre and natural resources"
               onChange={handleChange}
             ></input>
             <span class="filter-text">Agricultre and Natural Resouces</span>
@@ -115,7 +115,7 @@ function Dashboard() {
               type="checkbox"
               class="filter-option"
               name="field"
-              value="architecture-and-urban-planning"
+              value="architecture and urban-planning"
               onChange={handleChange}
             ></input>
             <span class="filter-text">Architecture and Urban Planning</span>
@@ -124,7 +124,7 @@ function Dashboard() {
               type="checkbox"
               class="filter-option"
               name="field"
-              value="art-and-humanities"
+              value="art and humanities"
               onChange={handleChange}
             ></input>
             <span class="filter-text">Art and Humanities</span>
@@ -133,7 +133,7 @@ function Dashboard() {
               type="checkbox"
               class="filter-option"
               name="field"
-              value="business-and-management"
+              value="business and management"
               onChange={handleChange}
             ></input>
             <span class="filter-text">Business and Management</span>
@@ -151,7 +151,7 @@ function Dashboard() {
               type="checkbox"
               class="filter-option"
               name="field"
-              value="engineering-and-computer-science"
+              value="engineering and computer science"
               onChange={handleChange}
             ></input>
             <span class="filter-text">Engineering and Computer Science</span>
@@ -160,7 +160,7 @@ function Dashboard() {
               type="checkbox"
               class="filter-option"
               name="field"
-              value="environmental-studies"
+              value="environmental studies"
               onChange={handleChange}
             ></input>
             <span class="filter-text">Environmental Studies</span>
@@ -169,7 +169,7 @@ function Dashboard() {
               type="checkbox"
               class="filter-option"
               name="field"
-              value="health-and-medicine"
+              value="health and medicine"
               onChange={handleChange}
             ></input>
             <span class="filter-text">Health and Medicine</span>
@@ -178,7 +178,7 @@ function Dashboard() {
               type="checkbox"
               class="filter-option"
               name="field"
-              value="information-and-library-science"
+              value="information and library science"
               onChange={handleChange}
             ></input>
             <span class="filter-text">Information and Library Science</span>
@@ -187,7 +187,7 @@ function Dashboard() {
               type="checkbox"
               class="filter-option"
               name="field"
-              value="interdisciplinary-studies"
+              value="interdisciplinary studies"
               onChange={handleChange}
             ></input>
             <span class="filter-text">Interdisciplinary Studies</span>
@@ -196,7 +196,7 @@ function Dashboard() {
               type="checkbox"
               class="filter-option"
               name="field"
-              value="mathematics-and-statistics"
+              value="mathematics and statistics"
               onChange={handleChange}
             ></input>
             <span class="filter-text">Mathematics and Statistics</span>
@@ -205,7 +205,7 @@ function Dashboard() {
               type="checkbox"
               class="filter-option"
               name="field"
-              value="physical-and-life-sciences"
+              value="physical and life sciences"
               onChange={handleChange}
             ></input>
             <span class="filter-text">Physical and Life Sciences</span>
@@ -214,7 +214,7 @@ function Dashboard() {
               type="checkbox"
               class="filter-option"
               name="field"
-              value="social-sciences"
+              value="social sciences"
               onChange={handleChange}
             ></input>
             <span class="filter-text">Social Sciences</span>
@@ -285,7 +285,7 @@ function Dashboard() {
               type="checkbox"
               class="filter-option"
               name="school"
-              value="riverside"
+              value="UC Riverside"
               onChange={handleChange}
             ></input>
             <span class="filter-text">Riverside</span>
@@ -294,7 +294,7 @@ function Dashboard() {
               type="checkbox"
               class="filter-option"
               name="school"
-              value="berkely"
+              value="UC Berkley"
               onChange={handleChange}
             ></input>
             <span class="filter-text">Berkely</span>
@@ -303,7 +303,7 @@ function Dashboard() {
               type="checkbox"
               class="filter-option"
               name="school"
-              value="los-angeles"
+              value="UC Los Angeles"
               onChange={handleChange}
             ></input>
             <span class="filter-text">Los Angeles</span>
@@ -312,7 +312,7 @@ function Dashboard() {
               type="checkbox"
               class="filter-option"
               name="school"
-              value="san-diego"
+              value="UC San Diego"
               onChange={handleChange}
             ></input>
             <span class="filter-text">San Diego</span>
@@ -321,7 +321,7 @@ function Dashboard() {
               type="checkbox"
               class="filter-option"
               name="school"
-              value="irvine"
+              value="UC Irvine"
               onChange={handleChange}
             ></input>
             <span class="filter-text">Irvine</span>
@@ -330,7 +330,7 @@ function Dashboard() {
               type="checkbox"
               class="filter-option"
               name="school"
-              value="davis"
+              value="UC Davis"
               onChange={handleChange}
             ></input>
             <span class="filter-text">Davis</span>
@@ -339,7 +339,7 @@ function Dashboard() {
               type="checkbox"
               class="filter-option"
               name="school"
-              value="merced"
+              value="UC Merced"
               onChange={handleChange}
             ></input>
             <span class="filter-text">Merced</span>
@@ -348,7 +348,7 @@ function Dashboard() {
               type="checkbox"
               class="filter-option"
               name="school"
-              value="santa-barbara"
+              value="UC Santa Barbara"
               onChange={handleChange}
             ></input>
             <span class="filter-text">Santa Barbara</span>
@@ -357,7 +357,7 @@ function Dashboard() {
               type="checkbox"
               class="filter-option"
               name="school"
-              value="santa-cruz"
+              value="UC Santa Cruz"
               onChange={handleChange}
             ></input>
             <span class="filter-text">Santa Cruz</span>
