@@ -6,31 +6,36 @@ let UserController = require("../controllers/UserController");
 const AuthController = require("../controllers/AuthController");
 
 //create chat group
-router.post("/group", AuthController.authenticate, async (req, res) => {
-  try {
-    const sender = req.body.sender;
-    const receiver = req.body.receiver;
+router.post(
+  "/group/:receiverID",
+  AuthController.authenticate,
+  async (req, res) => {
+    try {
+      const sender = req.userId;
+      const receiver = req.params.receiverID;
+      console.log("create chat group called reciever: ", receiver);
 
-    let confirmation = await MessageController.createGroup(sender, receiver);
-    console.log(confirmation);
-    if (confirmation != null) {
-      //add group id to both userAccounts to keep track of.
-      MessageController.addGroupIdToUserAccount(sender, confirmation._id);
-      MessageController.addGroupIdToUserAccount(receiver, confirmation._id);
+      let confirmation = await MessageController.createGroup(sender, receiver);
+      console.log(confirmation);
+      if (confirmation != null) {
+        //add group id to both userAccounts to keep track of.
+        MessageController.addGroupIdToUserAccount(sender, confirmation._id);
+        MessageController.addGroupIdToUserAccount(receiver, confirmation._id);
 
-      res.status(201).json({ message: "Group successfully created" });
-    } else {
-      res
-        .status(404)
-        .json({ message: "Could not create group. Please try again" });
+        res.status(201).json({ message: "Group successfully created" });
+      } else {
+        res
+          .status(409)
+          .json({ message: "Could not create group. Please try again" });
+      }
+    } catch (error) {
+      console.error(error);
+      return res
+        .status(500)
+        .json({ message: "An error occurred. Please try again" + error });
     }
-  } catch (error) {
-    console.error(error);
-    return res
-      .status(500)
-      .json({ message: "An error occurred. Please try again" + error });
   }
-});
+);
 
 //leave chat group
 router.delete("/group", AuthController.authenticate, (req, res) => {});
