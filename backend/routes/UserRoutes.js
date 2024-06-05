@@ -61,7 +61,7 @@ router.post("/", AuthController.authenticate, async (req, res) => {
   try {
     const newUser = req.body;
     const userID = req.userId;
-    console.log("User ID: ", userID);
+
     // TO DO: Need to check if user already exists, id will be passed by cookie
     let user = await userController.createUser(newUser, userID);
     if (user === null) {

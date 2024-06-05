@@ -39,6 +39,7 @@ async function updateUser(userId, updatedUser) {
 }
 
 async function createUser(user, userID) {
+async function createUser(user, userID) {
   console.log(user);
   if (user === null) {
     return null;
