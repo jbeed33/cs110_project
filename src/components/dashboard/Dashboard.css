@@ -1,6 +1,6 @@
 #dashboard {
   display: flex;
-  width: 99.5%;
+  width: 100vw;
   height: 90vh;
   /* border: 2px solid red; */
   overflow: hidden;
