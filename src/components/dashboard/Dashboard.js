@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import "./Dashboard.css";
 import Navbar from "../navbar/Navbar";
 
@@ -6,39 +6,69 @@ function Dashboard() {
   // State for filter data
 
   const [filterData, setFilterData] = useState([]);
+  const [tutors, setTutors] = useState(Array(0).fill(""));
+  const [searchUrl, setSearchurl] = useState(
+    "http://localhost:8080/api/filter"
+  );
+  const baseUrl = "http://localhost:8080/api/filter?";
+  const [signal, setSignal] = useState(0);
 
+  const getUsers = async () => {
+    if (
+      searchUrl === "http://localhost:8080/api/filter?" ||
+      searchUrl === "http://localhost:8080/api/filter"
+    ) {
+      return;
+    }
+    const res = await fetch(searchUrl, {
+      credentials: "include",
+    });
+    const data = await res.json();
+    setTutors(data);
+    // console.log(data);
+  };
+
+  useEffect(() => {
+      getUsers();
+  }, [searchUrl]);
+
+  useEffect(() => {
+    let newSearch = baseUrl;
+    for (let query in filterData) {
+      newSearch += "&" + filterData[query];
+    }
+    setSearchurl(newSearch);
+  }, [filterData, signal]);
 
   // Handle changes in filter inputs.
   const handleChange = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     const filterString = `${name}=${value}`;
-    console.log(e.target.checked);
-    console.log(filterString)
-    if(e.target.checked === true){
-      setFilterData(prev => {
+    // console.log(e.target.checked);
+    // console.log(filterString);
+    if (e.target.checked === true) {
+      setFilterData((prev) => {
         prev.push(filterString);
         return prev;
       });
-    }
-    else{
-      setFilterData(prev => {
-        console.log("prev:", prev)
+    } else {
+      setFilterData((prev) => {
+        // console.log("prev:", prev);
         const index = prev.findIndex((el) => el === filterString);
-        console.log("Index" , index);
+        // console.log("Index", index);
         prev.splice(index, 1);
         return prev;
-
       });
     }
-   
-    console.log(filterData);
+
+    setSignal(signal + 1);
   };
 
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     // able to send filterData to backend or do actions
-    console.log('Form submitted:', filterData);
+    console.log("Form submitted:", filterData);
   };
 
   return (
@@ -70,7 +100,8 @@ function Dashboard() {
             <br></br>
           </form>
           <form class="filter-category">
-            <label class="filter-section">Subject</label><br/>
+            <label class="filter-section">Subject</label>
+            <br />
             <input
               type="checkbox"
               class="filter-option"
@@ -78,7 +109,8 @@ function Dashboard() {
               value="agricultre-and-natural-resources"
               onChange={handleChange}
             ></input>
-            <span class="filter-text">Agricultre and Natural Resouces</span><br/>
+            <span class="filter-text">Agricultre and Natural Resouces</span>
+            <br />
             <input
               type="checkbox"
               class="filter-option"
@@ -86,7 +118,8 @@ function Dashboard() {
               value="architecture-and-urban-planning"
               onChange={handleChange}
             ></input>
-            <span class="filter-text">Architecture and Urban Planning</span><br/>
+            <span class="filter-text">Architecture and Urban Planning</span>
+            <br />
             <input
               type="checkbox"
               class="filter-option"
@@ -94,7 +127,8 @@ function Dashboard() {
               value="art-and-humanities"
               onChange={handleChange}
             ></input>
-            <span class="filter-text">Art and Humanities</span><br/>
+            <span class="filter-text">Art and Humanities</span>
+            <br />
             <input
               type="checkbox"
               class="filter-option"
@@ -102,7 +136,8 @@ function Dashboard() {
               value="business-and-management"
               onChange={handleChange}
             ></input>
-            <span class="filter-text">Business and Management</span><br/>
+            <span class="filter-text">Business and Management</span>
+            <br />
             <input
               type="checkbox"
               class="filter-option"
@@ -110,7 +145,8 @@ function Dashboard() {
               value="education"
               onChange={handleChange}
             ></input>
-            <span class="filter-text">Education</span><br/>
+            <span class="filter-text">Education</span>
+            <br />
             <input
               type="checkbox"
               class="filter-option"
@@ -118,7 +154,8 @@ function Dashboard() {
               value="engineering-and-computer-science"
               onChange={handleChange}
             ></input>
-            <span class="filter-text">Engineering and Computer Science</span><br/>
+            <span class="filter-text">Engineering and Computer Science</span>
+            <br />
             <input
               type="checkbox"
               class="filter-option"
@@ -126,7 +163,8 @@ function Dashboard() {
               value="environmental-studies"
               onChange={handleChange}
             ></input>
-            <span class="filter-text">Environmental Studies</span><br/>
+            <span class="filter-text">Environmental Studies</span>
+            <br />
             <input
               type="checkbox"
               class="filter-option"
@@ -134,7 +172,8 @@ function Dashboard() {
               value="health-and-medicine"
               onChange={handleChange}
             ></input>
-            <span class="filter-text">Health and Medicine</span><br/>
+            <span class="filter-text">Health and Medicine</span>
+            <br />
             <input
               type="checkbox"
               class="filter-option"
@@ -142,7 +181,8 @@ function Dashboard() {
               value="information-and-library-science"
               onChange={handleChange}
             ></input>
-            <span class="filter-text">Information and Library Science</span><br/>
+            <span class="filter-text">Information and Library Science</span>
+            <br />
             <input
               type="checkbox"
               class="filter-option"
@@ -150,7 +190,8 @@ function Dashboard() {
               value="interdisciplinary-studies"
               onChange={handleChange}
             ></input>
-            <span class="filter-text">Interdisciplinary Studies</span><br/>
+            <span class="filter-text">Interdisciplinary Studies</span>
+            <br />
             <input
               type="checkbox"
               class="filter-option"
@@ -158,7 +199,8 @@ function Dashboard() {
               value="mathematics-and-statistics"
               onChange={handleChange}
             ></input>
-            <span class="filter-text">Mathematics and Statistics</span><br/>
+            <span class="filter-text">Mathematics and Statistics</span>
+            <br />
             <input
               type="checkbox"
               class="filter-option"
@@ -166,7 +208,8 @@ function Dashboard() {
               value="physical-and-life-sciences"
               onChange={handleChange}
             ></input>
-            <span class="filter-text">Physical and Life Sciences</span><br/>
+            <span class="filter-text">Physical and Life Sciences</span>
+            <br />
             <input
               type="checkbox"
               class="filter-option"
@@ -174,10 +217,12 @@ function Dashboard() {
               value="social-sciences"
               onChange={handleChange}
             ></input>
-            <span class="filter-text">Social Sciences</span><br/>
+            <span class="filter-text">Social Sciences</span>
+            <br />
           </form>
           <form class="filter-category" onSubmit={handleSubmit}>
-            <label class="filter-section">Qualifications</label><br/>
+            <label class="filter-section">Qualifications</label>
+            <br />
             <input
               type="checkbox"
               class="filter-option"
@@ -185,7 +230,8 @@ function Dashboard() {
               value="freshman"
               onChange={handleChange}
             ></input>
-            <span class="filter-text">Freshman</span><br/>
+            <span class="filter-text">Freshman</span>
+            <br />
             <input
               type="checkbox"
               class="filter-option"
@@ -193,7 +239,8 @@ function Dashboard() {
               value="sophomore"
               onChange={handleChange}
             ></input>
-            <span class="filter-text">Sophomore</span><br/>
+            <span class="filter-text">Sophomore</span>
+            <br />
             <input
               type="checkbox"
               class="filter-option"
@@ -201,7 +248,8 @@ function Dashboard() {
               value="junior"
               onChange={handleChange}
             ></input>
-            <span class="filter-text">Junior</span><br/>
+            <span class="filter-text">Junior</span>
+            <br />
             <input
               type="checkbox"
               class="filter-option"
@@ -209,7 +257,8 @@ function Dashboard() {
               value="senior"
               onChange={handleChange}
             ></input>
-            <span class="filter-text">Senior</span><br/>
+            <span class="filter-text">Senior</span>
+            <br />
             <input
               type="checkbox"
               class="filter-option"
@@ -217,7 +266,8 @@ function Dashboard() {
               value="graduate"
               onChange={handleChange}
             ></input>
-            <span class="filter-text">Graduate</span><br/>
+            <span class="filter-text">Graduate</span>
+            <br />
             <input
               type="checkbox"
               class="filter-option"
@@ -225,8 +275,9 @@ function Dashboard() {
               value="phd"
               onChange={handleChange}
             ></input>
-            <span class="filter-text">PhD</span><br/>
-           </form>
+            <span class="filter-text">PhD</span>
+            <br />
+          </form>
           <form class="filter-category" onSubmit={handleSubmit}>
             <label class="filter-section">UC Campus</label>
             <br></br>
@@ -313,108 +364,39 @@ function Dashboard() {
             <br></br>
           </form>
         </div>
+
         <div id="dashboard-student-list-container">
           <h1>Recommended Students</h1>
           <div id="student-list">
-            <div className="student-container">
-              <div className="left-student-container">
-                <img src="#"></img>
-                <button>Message</button>
-              </div>
-              <div className="middle-student-container">
-                <h2 className="middle-student-title">John Smith</h2>
-                <p>
-                  Hi , I am John a dedicated tutor working for UC Tutors! I love
-                  to play sports and learn about new things. I am currently
-                  working to get my master’s degree in Computer Science at the
-                  University of California Riverside. I am volunteering to help
-                  hone my skills in teaching as well as to understanding the
-                  basics of Computer Science and Mathematics. If you are
-                  interested in my services, please let me know!
-                </p>
-              </div>
-              <div className="right-student-container">
-                <ul>
-                  <li>
-                    <h4>Computer Science Major</h4>
-                  </li>
-                  <li>
-                    <h4>UC Riverside</h4>
-                  </li>
-                  <li>
-                    <h4>Freshman</h4>
-                  </li>
-                </ul>
+            {tutors?.map((tutor, index) => (
+              <div className="student-container" key={index}>
+                <div className="left-student-container">
+                  <img src="#"></img>
+                  <button>Message</button>
+                </div>
+                <div className="middle-student-container">
+                  <h2 className="middle-student-title">{tutor.userName}</h2>
+                  <p>{tutor.description}</p>
+                </div>
+                <div className="right-student-container">
+                  <ul>
+                    <li>
+                      <h4>{tutor.field}</h4>
+                    </li>
+                    <li>
+                      <h4>{tutor.school}</h4>
+                    </li>
+                    <li>
+                      <h4>{tutor.grade}</h4>
+                    </li>
+                  </ul>
 
-                <h2 className="right-student-review">Reviews</h2>
+                  <h2 className="right-student-review">Reviews</h2>
+                </div>
               </div>
-            </div>
-            <div className="student-container">
-              <div className="left-student-container">
-                <img src="#"></img>
-                <button>Message</button>
-              </div>
-              <div className="middle-student-container">
-                <h2 className="middle-student-title">John Smith</h2>
-                <p>
-                  Hi , I am John a dedicated tutor working for UC Tutors! I love
-                  to play sports and learn about new things. I am currently
-                  working to get my master’s degree in Computer Science at the
-                  University of California Riverside. I am volunteering to help
-                  hone my skills in teaching as well as to understanding the
-                  basics of Computer Science and Mathematics. If you are
-                  interested in my services, please let me know!
-                </p>
-              </div>
-              <div className="right-student-container">
-                <ul>
-                  <li>
-                    <h4>Computer Science Major</h4>
-                  </li>
-                  <li>
-                    <h4>UC Riverside</h4>
-                  </li>
-                  <li>
-                    <h4>Freshman</h4>
-                  </li>
-                </ul>
+            ))}
 
-                <h2 className="right-student-review">Reviews</h2>
-              </div>
-            </div>
-            <div className="student-container">
-              <div className="left-student-container">
-                <img src="#"></img>
-                <button>Message</button>
-              </div>
-              <div className="middle-student-container">
-                <h2 className="middle-student-title">John Smith</h2>
-                <p>
-                  Hi , I am John a dedicated tutor working for UC Tutors! I love
-                  to play sports and learn about new things. I am currently
-                  working to get my master’s degree in Computer Science at the
-                  University of California Riverside. I am volunteering to help
-                  hone my skills in teaching as well as to understanding the
-                  basics of Computer Science and Mathematics. If you are
-                  interested in my services, please let me know!
-                </p>
-              </div>
-              <div className="right-student-container">
-                <ul>
-                  <li>
-                    <h4>Computer Science Major</h4>
-                  </li>
-                  <li>
-                    <h4>UC Riverside</h4>
-                  </li>
-                  <li>
-                    <h4>Freshman</h4>
-                  </li>
-                </ul>
-
-                <h2 className="right-student-review">Reviews</h2>
-              </div>
-            </div>
+            {tutors?.length === 0 ? <div>No Students Found</div> : ""}
           </div>
         </div>
       </div>
