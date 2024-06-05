@@ -53,7 +53,7 @@ export default function SignUp() {
   }
 
   return (
-    <>
+    <div id="signup-body">
       <Navbar />
       <div id="signup-container">
         <div id="signup-form">
@@ -253,6 +253,6 @@ export default function SignUp() {
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 }
