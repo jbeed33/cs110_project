@@ -103,50 +103,50 @@ export default function SignUp() {
                   <option value="none" disabled selected>
                     --Select your field of study--
                   </option>
-                  <option value="agriculture-and-natural-resources">
+                  <option value="agriculture and natural resources">
                     Agricultre and Natural Resources
                   </option>
-                  <option value="architecture-and-urban-planning">
+                  <option value="architecture and urban planning">
                     Architecture and Urban Planning
                   </option>
-                  <option value="art-and-humanities">Art and Humanities</option>
+                  <option value="art and humanities">Art and Humanities</option>
                   <option value="business-and-management">
                     Business and Management
                   </option>
                   <option value="education">Education</option>
-                  <option value="engineering-and-computer-science">
+                  <option value="engineering and computer science">
                     Engineering and Computer Science
                   </option>
-                  <option value="environmental-studies">
+                  <option value="environmental studies">
                     Environmental Studies
                   </option>
-                  <option value="health-and-medicine">
+                  <option value="health and medicine">
                     Health and Medicine
                   </option>
-                  <option value="information-and-library-science">
+                  <option value="information and library science">
                     Information and Library Science
                   </option>
-                  <option value="interdisciplinary-studies">
+                  <option value="interdisciplinary studies">
                     Interdisciplinary Studies
                   </option>
-                  <option value="law-and-legal-studies">
+                  <option value="law and legal studies">
                     Law and Legal Studies
                   </option>
-                  <option value="mathematics-and-statistics">
+                  <option value="mathematics and statistics">
                     Mathematics and Statistics
                   </option>
-                  <option value="physical-and-life-sciences">
+                  <option value="physical and life sciences">
                     Physical and Life Sciences
                   </option>
-                  <option value="social-sciences">Social Sciences</option>
+                  <option value="social sciences">Social Sciences</option>
                 </select>
                 <br />
                 <label className="form-text">Tutoring Availability</label>{" "}
                 <br />
-                <input type="radio" name="options" value="in-person"></input>
+                <input type="radio" name="options" value="in person"></input>
                 <span className="box-text">In-Person</span>
                 <br />
-                <input type="radio" name="options" value="remote"></input>
+                <input type="radio" name="options" value="online"></input>
                 <span className="box-text">Remote</span>
                 <br />
                 <input type="radio" name="options" value="both"></input>
@@ -184,57 +184,57 @@ export default function SignUp() {
               <div className="signup-right">
                 <label className="form-text"> UC School</label> <br />
                 <select id="form-school" name="school" required>
-                  <option value="uc-berkeley">UC Berkeley</option>
-                  <option value="uc-david">UC Davis</option>
-                  <option value="uc-irvine">UC Irvine</option>
-                  <option value="uc-los-angales">UC Los Angeles</option>
-                  <option value="uc-merced">UC Merced</option>
-                  <option value="uc-riverside">UC Riverside</option>
-                  <option value="uc-san-diego">UC San Diego</option>
-                  <option value="uc-san-fransico">UC San Fransico</option>
-                  <option value="uc-santa-barbara">UC Santa Barbara</option>
-                  <option value="uc-santa-cruz">UC Santa Cruz</option>
+                  <option value="UC Berkeley">UC Berkeley</option>
+                  <option value="UC Davis">UC Davis</option>
+                  <option value="UC Irvine">UC Irvine</option>
+                  <option value="UC Los Angeles">UC Los Angeles</option>
+                  <option value="UC Merced">UC Merced</option>
+                  <option value="UC Riverside">UC Riverside</option>
+                  <option value="UC San Diego">UC San Diego</option>
+                  <option value="UC San Francisco">UC San Fransico</option>
+                  <option value="UC Santa Barbara">UC Santa Barbara</option>
+                  <option value="UC Santa Cruz">UC Santa Cruz</option>
                 </select>{" "}
                 <br />
                 <label className="form-text">Subjects Needed Help In</label>
                 <br />
                 <select id="form-subject-help" name="subjectHelp" size="8">
-                  <option value="agriculture-and-natural-resources">
+                  <option value="agriculture and natural resources">
                     Agricultre and Natural Resources
                   </option>
-                  <option value="architecture-and-urban-planning">
+                  <option value="architecture and urban planning">
                     Architecture and Urban Planning
                   </option>
-                  <option value="art-and-humanities">Art and Humanities</option>
-                  <option value="business-and-management">
+                  <option value="art and humanities">Art and Humanities</option>
+                  <option value="business and management">
                     Business and Management
                   </option>
                   <option value="education">Education</option>
-                  <option value="engineering-and-computer-science">
+                  <option value="engineering and computer science">
                     Engineering and Computer Science
                   </option>
-                  <option value="environmental-studies">
+                  <option value="environmental studies">
                     Environmental Studies
                   </option>
-                  <option value="health-and-medicine">
+                  <option value="health and medicine">
                     Health and Medicine
                   </option>
-                  <option value="information-and-library-science">
+                  <option value="information and library science">
                     Information and Library Science
                   </option>
-                  <option value="interdisciplinary-studies">
+                  <option value="interdisciplinary studies">
                     Interdisciplinary Studies
                   </option>
-                  <option value="law-and-legal-studies">
+                  <option value="law and legal studies">
                     Law and Legal Studies
                   </option>
-                  <option value="mathematics-and-statistics">
+                  <option value="mathematics and statistics">
                     Mathematics and Statistics
                   </option>
-                  <option value="physical-and-life-sciences">
+                  <option value="physical and life sciences">
                     Physical and Life Sciences
                   </option>
-                  <option value="social-sciences">Social Sciences</option>
+                  <option value="social sciences">Social Sciences</option>
                 </select>
                 <br />
                 <label className="form-text">
