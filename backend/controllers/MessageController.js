@@ -12,6 +12,16 @@ async function createMessage(sender, receiver, message) {
 
 async function createGroup(sender, receiver) {
   if (sender && receiver) {
+    const existingChat = await GroupModel.findOne({
+      users: { $all: [sender, receiver] },
+    });
+
+    console.log("ExistingChat: ", existingChat);
+
+    if (existingChat) {
+      return null;
+    }
+
     return await GroupModel.create({ users: [sender, receiver] });
   } else {
     return null;

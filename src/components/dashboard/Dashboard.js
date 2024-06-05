@@ -71,6 +71,23 @@ function Dashboard() {
     console.log("Form submitted:", filterData);
   };
 
+  const createMessageGroup = async (e) => {
+    try {
+      const receiver = e.target.dataset.user || null;
+      const res = await fetch(
+        `http://localhost:8080/api/chat/group/${receiver}`,
+        {
+          credentials: "include",
+          method: "POST",
+        }
+      );
+      const data = await res.json();
+      console.log(data);
+    } catch (error) {
+      console.error("error has occured", error);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -372,7 +389,12 @@ function Dashboard() {
               <div className="student-container" key={index}>
                 <div className="left-student-container">
                   <img src="#"></img>
-                  <button>Message</button>
+                  <button
+                    data-user={tutor.userId}
+                    onClick={(e) => createMessageGroup(e)}
+                  >
+                    Message
+                  </button>
                 </div>
                 <div className="middle-student-container">
                   <h2 className="middle-student-title">{tutor.userName}</h2>
