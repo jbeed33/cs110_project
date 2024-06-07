@@ -1,70 +1,81 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## UC Tutors - "Bringing the Gap in Education"
 
-## Available Scripts
+## Meet the Developers
 
-In the project directory, you can run:
+Joshua Beed - I am the Lead Developer for UC Tutors. I helped plan, design, and implement features for the application such as authentication, recommendation system, and message system to name a few. I also designed the database schemas and served as the database administrator. Finally I acted as a solo backend developer and was reponsible for making decisions for the overall system.
 
-### `npm start`
+Aidan Ching - 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Jason Guan - 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Joseph Flores - 
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## What is UC Totors?
 
-### `npm run build`
+This app allows UC students to get paired with other students on campus who feel they understand the material well enough to tutor others. We have seen how some upper and lower division classes can be tough for students, and some schools do not offer tutoring for certain courses. They mainly focus on the notoriously difficult ones and leave some other classes without tutors. With our app, we aim to bridge that gap and make it easier for students to help each other.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Tools & Technologies Used
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 
-### `npm run eject`
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)
+![Prettier](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Features
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**Log In:**
 
-## Learn More
+-   Users can login to their respective accounts using Google Login. Once logged in, they are either redirected to the Sign Up page or dashboard.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Sign Up:**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+-  The Sign Up page consist of a form where a user can enter information about themselves so that the system can recommend students or tutors to them. This inforation is further used in the information system as well. 
 
-### Code Splitting
+**Dashboard:**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The Dashboard consists of a filter section and recommeded user section where the user can view students they match with based off of the filter or the recommendation system.
 
-### Analyzing the Bundle Size
+**Chat Catalog:**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+-   Features chat rooms where a user can directly communicate with a student or tutor.
 
-### Making a Progressive Web App
+**Database:**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+-   Used MongoDB.
+-   Contains user information such as their name, what UC they attend, their chat history, reviews, the subject they need help with the most, their current grade level, whether or not they want to attend a session online or in person, and descriptions of themselves.
+-   The database also contains admin information as well as session information.
 
-### Advanced Configuration
+## Final Design
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+### Login Page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Sign-Up
+
+
+### Settings
+
+
+### Dashboard
+
+
+### Chat Rooms
+
+
+### Admin
+
+
+### Ratings & Comments on Tutors
+
+
+## Getting Started With Our Project
+
