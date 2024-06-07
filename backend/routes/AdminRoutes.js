@@ -9,8 +9,9 @@ const AuthController = require("../controllers/AuthController");
 // Admin can get all users.
 router.get("/", AuthController.authenticate, async (req, res) => {
   try {
+    console.log("role", req.role);
     // TO DO: cookies will be used for authentication
-    let user = await adminController.getAllUsers();
+    let user = await adminController.getAllUsers(req.role);
     if (user === null) {
       return res
         .status(404)

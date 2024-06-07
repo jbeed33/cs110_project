@@ -13,8 +13,11 @@ const authSchema = new Schema({
   },
   image: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
+  role: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("AuthModel", authSchema, "auth");
