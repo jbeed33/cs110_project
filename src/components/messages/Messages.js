@@ -19,64 +19,106 @@ const formatDate = (dateString) => {
   }
 };
 
-function Messages({ groupId }) {
+function Messages() {
   const [contacts, setContacts] = useState([]);
   const [messages, setMessages] = useState([]);
   const [selectedContact, setSelectedContact] = useState(null);
   const [newMessage, setNewMessage] = useState("");
+  const [currentChat, setCurrentChat] = useState("");
+  const [currentGroup, setCurrentGroup] = useState("");
 
   useEffect(() => {
-    axios.get(`${API_URL}/api/chat/group`).then((response) => {
-      const contactsData = response.data.userGroups.map(group => ({
-        userId: group.textPartner.userId,
-        name: group.textPartner.userName,
-        image: group.textPartner.userImage,
-        lastMessageDate: group.lastMessage.publishDate,
-        lastMessageText: group.lastMessage.message
-      }));
-      setContacts(contactsData);
-      setSelectedContact(contactsData[0]);
-    });
+    axios
+      .get(`${API_URL}/api/chat/group`, { withCredentials: true })
+      .then(response => {
+        console.log(response.data.userGroups);
+        const contactsData = response.data.userGroups.map(group => {
+          // Check if group.lastMessage exists and has publishDate
+          if (group.lastMessage && group.lastMessage.publishDate) {
+            return {
+              userId: group.chatPartner.userId,
+              name: group.chatPartner.userName,
+              image: group.chatPartner.userImage,
+              lastMessageDate: group.lastMessage.publishDate,
+              lastMessageText: group.lastMessage.message,
+              chatId: group.chatId
+            };
+          } else {
+            // Handle the case where lastMessage or publishDate is missing
+            // You can set default values or handle it as you need
+            return {
+              userId: group.chatPartner.userId,
+              name: group.chatPartner.userName,
+              image: group.chatPartner.userImage,
+              lastMessageDate: "", // Set default value for lastMessageDate
+              lastMessageText: "", // Set default value for lastMessageText
+              chatId: group.chatId
+            };
+          }
+        });
+        console.log("contactsData", contactsData);
+        setContacts(contactsData);
+        setSelectedContact(contactsData[0]);
+      })
+      .catch(error => {
+        console.error("Error fetching data:", error);
+      });
   }, []);
 
-  useEffect(() => {
-    if (groupId) {
-      axios
-        .get(`${API_URL}/api/chat/messages/${groupId}`)
-        .then((response) => {
-          setMessages(response.data);
-        });
-    }
-  }, [groupId]);
 
-  const handleSelectContact = (contact) => {
-    setSelectedContact(contact);
-    if (contact.userId) {
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      console.log("getMessage useEffect");
+      if (currentGroup) {
+        axios.get(`${API_URL}/api/chat/messages/${currentGroup}`, { withCredentials: true })
+          .then((response) => {
+            console.log("getting messages", response.data);
+            setMessages(response.data);
+          });
+      }
+    }, 3000);
+  
+    
+    return () => clearInterval(intervalId);
+  }, [currentGroup]);
+ 
+  const handleSelectContact = (e) => {
+    const receiver = e.target.dataset.chatid || null;
+    console.log("receiver", receiver);
+    setCurrentChat(receiver);
+    // setSelectedContact(contact);
+    if (receiver) {
       axios
-        .get(`${API_URL}/api/chat/messages/${contact.userId}`)
+        .get(`${API_URL}/api/chat/messages/${receiver}`, { withCredentials: true })
         .then((response) => {
+          setCurrentGroup(receiver);
+          console.log(response.data);
           setMessages(response.data);
         });
     }
   };
 
-  const handleSendMessage = () => {
+  const handleSendMessage = (newMessage) => {
     if (newMessage.trim() === "") return;
-
+    console.log("qweo", selectedContact);
     const newMsg = {
-      sender: "encryptedEmailToken12345",
       receiver: selectedContact.userId,
       message: newMessage,
     };
-
+    console.log(currentChat);
+  
+    // Include credentials in the request headers
     axios
-      .post(`${API_URL}/api/chat/messages/${selectedContact.userId}`, newMsg)
+      .post(`${API_URL}/api/chat/messages/${currentChat}`, newMsg, { withCredentials: true })
       .then((response) => {
+        console.log(response.data);
         setMessages((prevMessages) => [...prevMessages, response.data]);
         setNewMessage("");
+      })
+      .catch((error) => {
+        console.error("Error sending message:", error);
       });
   };
-
   return (
     <div id="messages">
       <div id="messages-form-container">
@@ -85,12 +127,14 @@ function Messages({ groupId }) {
           {contacts.map((contact) => (
             <div
               key={contact.userId}
+              data-chatid = {contact.chatId}
+              onClick = {e => handleSelectContact(e)}
               className={`contact ${
                 selectedContact && selectedContact.userId === contact.userId
                   ? "selected"
                   : ""
               }`}
-              onClick={() => handleSelectContact(contact)}
+              // onClick={() => handleSelectContact(contact)}
             >
               <div className="contact-avatar">
                 {contact.image ? (
@@ -137,7 +181,7 @@ function Messages({ groupId }) {
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
             />
-            <button onClick={handleSendMessage}>SEND</button>
+            <button onClick={() => handleSendMessage(newMessage)}>SEND</button>
           </div>
         </div>
       </div>
