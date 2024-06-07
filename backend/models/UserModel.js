@@ -43,7 +43,7 @@ const userSchema = new Schema({
     required: true,
   },
   messageGroups: [],
+  reviews: [],
 });
 
 module.exports = mongoose.model("user", userSchema, "users");
-
