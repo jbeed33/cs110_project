@@ -1,5 +1,5 @@
 
-## UC Tutors - "Bringing the Gap in Education"
+## UC Tutors - "Connecting Students, Empowering Learning."
 
 ## Meet the Developers
 
