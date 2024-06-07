@@ -12,7 +12,7 @@ Jason Guan -
 Joseph Flores - 
 
 
-## What is UC Totors?
+## What is UC Tutors?
 
 This app allows UC students to get paired with other students on campus who feel they understand the material well enough to tutor others. We have seen how some upper and lower division classes can be tough for students, and some schools do not offer tutoring for certain courses. They mainly focus on the notoriously difficult ones and leave some other classes without tutors. With our app, we aim to bridge that gap and make it easier for students to help each other.
 
