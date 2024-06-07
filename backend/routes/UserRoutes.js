@@ -1,10 +1,12 @@
 let express = require("express");
-let userController = require("../controllers/UserController");
-let authController = require("../controllers/AuthController");
+const userController = require("../controllers/UserController");
+const authController = require("../controllers/AuthController");
 const AuthController = require("../controllers/AuthController");
+const ReviewController = require("../controllers/ReviewController");
 
 let router = express.Router();
 
+//Get User
 router.get("/:id", AuthController.authenticate, async (req, res) => {
   try {
     let userId = req.params.id;
@@ -24,6 +26,7 @@ router.get("/:id", AuthController.authenticate, async (req, res) => {
   }
 });
 
+//Remove User
 router.delete("/:id", AuthController.authenticate, async (req, res) => {
   try {
     let userId = req.params.id;
@@ -43,6 +46,7 @@ router.delete("/:id", AuthController.authenticate, async (req, res) => {
   }
 });
 
+//update User Profile
 router.put("/:id", AuthController.authenticate, async (req, res) => {
   try {
     console.log(req.body);
@@ -57,6 +61,7 @@ router.put("/:id", AuthController.authenticate, async (req, res) => {
   }
 });
 
+//Creating new user
 router.post("/", AuthController.authenticate, async (req, res) => {
   try {
     const newUser = req.body;
@@ -78,4 +83,59 @@ router.post("/", AuthController.authenticate, async (req, res) => {
   }
 });
 
+//Get all reviews for user
+router.get(
+  "/reviews/:receiverId",
+  AuthController.authenticate,
+  async (req, res) => {
+    try {
+      const receiverID = req.params.receiverId;
+      const reviews = await ReviewController.getAllReviews(receiverID);
+      if (reviews) {
+        res.status(200).json({ reviews: reviews });
+      } else {
+        return res
+          .status(500)
+          .json({ message: "Could not get reviews. Please try again" });
+      }
+    } catch (error) {
+      console.error(error);
+      return res
+        .status(500)
+        .json({ message: "An error occurred. Please try again" });
+    }
+  }
+);
+
+//Post a review for a user
+router.post(
+  "/reviews/:receiverId",
+  AuthController.authenticate,
+  async (req, res) => {
+    try {
+      const sender = req.userId;
+      const review = req.body.review;
+      const receiver = req.params.receiverId;
+
+      const confirmation = await ReviewController.addReview(
+        sender,
+        review,
+        receiver
+      );
+
+      if (confirmation) {
+        res.status(201).json({ message: "Review added" });
+      } else {
+        return res
+          .status(500)
+          .json({ message: "Could not add review. Please try again" });
+      }
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+        message: " Error occurred. Could not add review. Please try again",
+      });
+    }
+  }
+);
 module.exports = router;
