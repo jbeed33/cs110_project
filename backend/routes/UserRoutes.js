@@ -115,6 +115,7 @@ router.post(
     try {
       const sender = req.userId;
       const review = req.body.review;
+      console.log(review);
       const receiver = req.params.receiverId;
 
       const confirmation = await ReviewController.addReview(

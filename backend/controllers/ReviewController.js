@@ -10,6 +10,7 @@ async function createReview(senderId, review, senderName) {
 }
 
 async function addReview(senderId, reviewMsg, receiverId) {
+  console.log(senderId, reviewMsg, receiverId);
   if (senderId && reviewMsg && receiverId) {
     //Getter sender user name
     const foundSender = await UserController.getUser(senderId);

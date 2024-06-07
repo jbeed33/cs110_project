@@ -6,7 +6,7 @@
  * @param {String} review
  *
  */
-function Review(senderID, senderName, review) {
+function Review(senderID, review, senderName) {
   this.senderId = senderID;
   this.senderName = senderName;
   this.review = review;
