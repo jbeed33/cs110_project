@@ -19,81 +19,61 @@ const formatDate = (dateString) => {
   }
 };
 
-function Messages() {
+function Messages({ groupId }) {
   const [contacts, setContacts] = useState([]);
-  const [messages, setMessages] = useState({});
+  const [messages, setMessages] = useState([]);
   const [selectedContact, setSelectedContact] = useState(null);
   const [newMessage, setNewMessage] = useState("");
-  const [showGroupChatModal, setShowGroupChatModal] = useState(false);
-  const [groupChatMembers, setGroupChatMembers] = useState("");
 
-  
   useEffect(() => {
-    axios.get(`${API_URL}/api/chat/contacts`).then((response) => {
-      setContacts(response.data);
-      setSelectedContact(response.data[0]); 
+    axios.get(`${API_URL}/api/chat/group`).then((response) => {
+      const contactsData = response.data.userGroups.map(group => ({
+        userId: group.textPartner.userId,
+        name: group.textPartner.userName,
+        image: group.textPartner.userImage,
+        lastMessageDate: group.lastMessage.publishDate,
+        lastMessageText: group.lastMessage.message
+      }));
+      setContacts(contactsData);
+      setSelectedContact(contactsData[0]);
     });
   }, []);
 
- 
   useEffect(() => {
-    if (selectedContact) {
+    if (groupId) {
       axios
-        .get(`${API_URL}/api/chat/messages/${selectedContact.userId}`)
+        .get(`${API_URL}/api/chat/messages/${groupId}`)
         .then((response) => {
-          setMessages((prevMessages) => ({
-            ...prevMessages,
-            [selectedContact.userId]: response.data,
-          }));
+          setMessages(response.data);
         });
     }
-  }, [selectedContact]);
+  }, [groupId]);
 
   const handleSelectContact = (contact) => {
     setSelectedContact(contact);
+    if (contact.userId) {
+      axios
+        .get(`${API_URL}/api/chat/messages/${contact.userId}`)
+        .then((response) => {
+          setMessages(response.data);
+        });
+    }
   };
 
   const handleSendMessage = () => {
     if (newMessage.trim() === "") return;
 
     const newMsg = {
-      sender: "Me",
-      receiver: selectedContact.name,
+      sender: "encryptedEmailToken12345",
+      receiver: selectedContact.userId,
       message: newMessage,
     };
 
-    
     axios
       .post(`${API_URL}/api/chat/messages/${selectedContact.userId}`, newMsg)
       .then((response) => {
-        setMessages((prevMessages) => ({
-          ...prevMessages,
-          [selectedContact.userId]: [
-            ...(prevMessages[selectedContact.userId] || []),
-            response.data,
-          ],
-        }));
+        setMessages((prevMessages) => [...prevMessages, response.data]);
         setNewMessage("");
-      });
-  };
-
-  const handleCreateGroupChat = () => {
-    const sender = "encryptedEmailToken123"; 
-    const receivers = groupChatMembers.split(',').map(email => email.trim());
-
-    const data = {
-      sender,
-      receiver: receivers.join(','),
-    };
-
-    axios.post(`${API_URL}/api/chat/group`, data)
-      .then(response => {
-        alert(response.data.message); 
-        setShowGroupChatModal(false);
-        setGroupChatMembers("");
-      })
-      .catch(error => {
-        console.error("There was an error creating the group chat!", error);
       });
   };
 
@@ -112,20 +92,23 @@ function Messages() {
               }`}
               onClick={() => handleSelectContact(contact)}
             >
-              <div className="contact-avatar"></div>
+              <div className="contact-avatar">
+                {contact.image ? (
+                  <img src={contact.image} alt={`${contact.name}'s avatar`} />
+                ) : (
+                  <div className="default-avatar">{contact.name[0]}</div>
+                )}
+              </div>
               <div className="contact-info">
                 <div className="contact-name">{contact.name}</div>
-                <div className="contact-status">{contact.status}</div>
               </div>
               <div className="contact-date">
                 {formatDate(contact.lastMessageDate)}
               </div>
+              <div className="last-message-text">{contact.lastMessageText}</div>
             </div>
           ))}
         </div>
-        <button onClick={() => setShowGroupChatModal(true)}>
-          Create Group Chat
-        </button>
       </div>
       <div id="chat-header">
         Conversation with {selectedContact && selectedContact.name}
@@ -133,21 +116,19 @@ function Messages() {
       <div id="chatbox-container">
         <div id="chat-window">
           <div id="chat-messages">
-            {(messages[selectedContact ? selectedContact.userId : ""] || []).map(
-              (message, index) => (
-                <div
-                  key={index}
-                  className={`message ${
-                    message.sender === "Me" ? "sent" : "received"
-                  }`}
-                >
-                  {message.sender !== "Me" && (
-                    <div className="message-avatar"></div>
-                  )}
-                  <div className="message-content">{message.message}</div>
-                </div>
-              )
-            )}
+            {messages.map((message, index) => (
+              <div
+                key={index}
+                className={`message ${
+                  message.sender === "encryptedEmailToken12345" ? "sent" : "received"
+                }`}
+              >
+                {message.sender !== "encryptedEmailToken12345" && (
+                  <div className="message-avatar"></div>
+                )}
+                <div className="message-content">{message.message}</div>
+              </div>
+            ))}
           </div>
           <div id="chat-input">
             <input
@@ -160,22 +141,6 @@ function Messages() {
           </div>
         </div>
       </div>
-
-      {showGroupChatModal && (
-        <div id="group-chat-modal">
-          <div className="modal-content">
-            <h2>Create Group Chat</h2>
-            <input
-              type="text"
-              placeholder="Enter email addresses separated by commas"
-              value={groupChatMembers}
-              onChange={(e) => setGroupChatMembers(e.target.value)}
-            />
-            <button onClick={handleCreateGroupChat}>Create</button>
-            <button onClick={() => setShowGroupChatModal(false)}>Cancel</button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
