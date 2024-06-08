@@ -11,9 +11,19 @@ export default function AdminPanel() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("http://localhost:8080/api/admin");
+      const res = await fetch("http://localhost:8080/api/admin", {
+        credentials: "include",
+      });
       const temp = await res.json();
-      setData(temp);
+      console.log("admin data: ", temp);
+      if (temp.msg !== null && temp.msg != "Unauthorized") {
+        setData(temp);
+      } else {
+        alert(
+          "You are not authorized to view this page because you are not admin"
+        );
+        window.location.href = "http://localhost:3000";
+      }
     };
     fetchData().catch(console.error);
   }, [signal]);
@@ -22,6 +32,7 @@ export default function AdminPanel() {
     <div>
       <Navbar />
       <div className="admin-panel-heading">Administrator Panel</div>
+
       <div className="usercard-grid">
         {data.map((entry, i) => (
           <UserCard

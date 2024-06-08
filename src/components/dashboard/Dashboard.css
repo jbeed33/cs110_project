@@ -1,14 +1,15 @@
 #dashboard {
   display: flex;
-  width: 99.5%;
+  width: 100vw;
   height: 90vh;
   /* border: 2px solid red; */
   overflow: hidden;
 }
 
 #dashboard-form-container {
-  width: 20%;
+  width: 30%;
   border: 2px solid rgb(0, 229, 255);
+  overflow-y: scroll;
 }
 
 #dashboard-student-list-container {

@@ -8,7 +8,7 @@ import Login from "./components/login/Login";
 import AdminPanel from "./components/admin/AdminPanel";
 import Messages from "./components/messages/Messages";
 import Dashboard from "./components/dashboard/Dashboard";
-import SignUp from "./components/signUp/SignUp";
+import SignUp from "./components/signup/SignUp";
 
 const router = createBrowserRouter([
   {
@@ -35,9 +35,9 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+
     <RouterProvider router={router} />
-  </React.StrictMode>
+
 );
 
 // If you want to start measuring performance in your app, pass a function
