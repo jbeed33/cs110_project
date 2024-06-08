@@ -24,7 +24,10 @@ function Dashboard() {
       credentials: "include",
     });
     const data = await res.json();
-    setTutors(data);
+    if (data.msg !== null && data.msg != "Unauthorized") {
+      setTutors(data);
+    }
+
     // console.log(data);
   };
 
