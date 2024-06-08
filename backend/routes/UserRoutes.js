@@ -7,9 +7,9 @@ const ReviewController = require("../controllers/ReviewController");
 let router = express.Router();
 
 //Get User
-router.get("/:id", AuthController.authenticate, async (req, res) => {
+router.get("/", AuthController.authenticate, async (req, res) => {
   try {
-    let userId = req.params.id;
+    let userId = req.userId;
     console.log(userId);
     let user = await userController.getUser(userId);
     if (user === null) {
@@ -27,9 +27,9 @@ router.get("/:id", AuthController.authenticate, async (req, res) => {
 });
 
 //Remove User
-router.delete("/:id", AuthController.authenticate, async (req, res) => {
+router.delete("/", AuthController.authenticate, async (req, res) => {
   try {
-    let userId = req.params.id;
+    let userId = req.userId;
     console.log(userId);
     let user = await userController.deleteUser(userId);
     if (user === null) {
@@ -47,10 +47,10 @@ router.delete("/:id", AuthController.authenticate, async (req, res) => {
 });
 
 //update User Profile
-router.put("/:id", AuthController.authenticate, async (req, res) => {
+router.put("/", AuthController.authenticate, async (req, res) => {
   try {
     console.log(req.body);
-    let result = await userController.updateUser(req.params.id, req.body);
+    let result = await userController.updateUser(req.userId, req.body);
     if (result === null || result === undefined) {
       return res.status(404).send("Could not update user. Please try again");
     }
