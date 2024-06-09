@@ -9,6 +9,7 @@ import AdminPanel from "./components/admin/AdminPanel";
 import Messages from "./components/messages/Messages";
 import Dashboard from "./components/dashboard/Dashboard";
 import SignUp from "./components/signup/SignUp";
+import Settings from "./components/settings/Settings";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,9 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />,
+  },
+  {path: "/settings",
+    element: <Settings />,
   },
 ]);
 

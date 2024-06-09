@@ -13,6 +13,9 @@ export default function Navbar() {
         <Link className="nav-links" to={"/messages"}>
           Messages
         </Link>
+        <Link className="nav-links" to={"/settings"}>
+          Settings 
+        </Link>
       </div>
 
       <div style={{ flexGrow: "1" }} />
