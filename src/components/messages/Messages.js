@@ -1,56 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./Messages.css";
 import Navbar from "../navbar/Navbar";
 
-const mockContacts = [
-  {
-    userId: "1",
-    name: "John Smith",
-    status: "Hey, I am available...",
-    lastMessageDate: "2024-05-28T12:00:00Z",
-  },
-  {
-    userId: "2",
-    name: "Albert H.",
-    status: "Hey, I am available...",
-    lastMessageDate: "2024-05-25T14:00:00Z",
-  },
-];
+const API_URL = "http://localhost:8080";
 
-const mockMessages = {
-  1: [
-    {
-      messageId: "uuid1",
-      sender: "John Smith",
-      receiver: "Me",
-      timestamp: "2023-05-27T12:00:00Z",
-      message: "Hey, I am available at 2pm tomorrow. Does that work for you?",
-    },
-    {
-      messageId: "uuid2",
-      sender: "Me",
-      receiver: "John Smith",
-      timestamp: "2023-05-27T12:05:00Z",
-      message: "Yes, that works!",
-    },
-    {
-      messageId: "uuid3",
-      sender: "John Smith",
-      receiver: "Me",
-      timestamp: "2023-05-27T12:10:00Z",
-      message: "Great, see you then.",
-    },
-  ],
-  2: [
-    {
-      messageId: "uuid4",
-      sender: "Albert H.",
-      receiver: "Me",
-      timestamp: "2023-05-26T14:00:00Z",
-      message: "Hey, I am available at 3pm tomorrow. Does that work for you?",
-    },
-  ],
-};
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -67,33 +21,91 @@ const formatDate = (dateString) => {
   }
 };
 
-function Messages() {
-  const [contacts] = useState(mockContacts);
-  const [messages, setMessages] = useState(mockMessages);
-  const [selectedContact, setSelectedContact] = useState(mockContacts[0]);
+function Messages({ currentUserId }) {
+  const [contacts, setContacts] = useState([]);
+  const [messages, setMessages] = useState([]);
+  const [selectedContact, setSelectedContact] = useState(null);
   const [newMessage, setNewMessage] = useState("");
+  const [currentChat, setCurrentChat] = useState("");
+  const [currentGroup, setCurrentGroup] = useState("");
 
-  const handleSelectContact = (contact) => {
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/api/chat/group`, { withCredentials: true })
+      .then((response) => {
+        const contactsData = response.data.userGroups.map((group) => {
+          return {
+            userId: group.chatPartner.userId,
+            name: group.chatPartner.userName,
+            image: group.chatPartner.userImage,
+            lastMessageDate: group.lastMessage?.publishDate || "",
+            lastMessageText: group.lastMessage?.message || "",
+            chatId: group.chatId,
+          };
+        });
+        setContacts(contactsData);
+        setSelectedContact(contactsData[0]);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (currentGroup) {
+        axios
+          .get(`${API_URL}/api/chat/messages/${currentGroup}`, {
+            withCredentials: true,
+          })
+          .then((response) => {
+            console.log("Messages fetched: ", response.data);
+            setMessages(response.data);
+          });
+      }
+    }, 3000);
+
+    return () => clearInterval(intervalId);
+  }, [currentGroup]);
+
+  const handleSelectContact = (e) => {
+    const receiver = e.target.dataset.chatid || null;
+    const contact = contacts.find((contact) => contact.chatId === receiver);
+    console.log("Selected contact:", contact);
+    setCurrentChat(receiver);
     setSelectedContact(contact);
+
+    if (receiver) {
+      axios
+        .get(`${API_URL}/api/chat/messages/${receiver}`, {
+          withCredentials: true,
+        })
+        .then((response) => {
+          console.log("Messages for selected contact: ", response.data);
+          setCurrentGroup(receiver);
+          setMessages(response.data);
+        });
+    }
   };
 
-  const handleSendMessage = () => {
+  const handleSendMessage = (newMessage) => {
     if (newMessage.trim() === "") return;
     const newMsg = {
-      messageId: `uuid${new Date().getTime()}`, // Generating a mock UUID
-      sender: "Me",
-      receiver: selectedContact.name,
-      timestamp: new Date().toISOString(),
+      receiver: selectedContact.userId,
       message: newMessage,
     };
-    setMessages({
-      ...messages,
-      [selectedContact.userId]: [
-        ...(messages[selectedContact.userId] || []),
-        newMsg,
-      ],
-    });
-    setNewMessage("");
+    axios
+      .post(`${API_URL}/api/chat/messages/${currentChat}`, newMsg, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        setMessages((prevMessages) => [...prevMessages, response.data]);
+        setNewMessage("");
+      })
+      .catch((error) => {
+        console.error("Error sending message:", error);
+      });
+
   };
 
   return (
@@ -106,15 +118,26 @@ function Messages() {
             {contacts.map((contact) => (
               <div
                 key={contact.userId}
+                data-chatid={contact.chatId}
+                onClick={(e) => handleSelectContact(e)}
                 className={`contact ${
-                  selectedContact.userId === contact.userId ? "selected" : ""
+                  selectedContact && selectedContact.userId === contact.userId
+                    ? "selected"
+                    : ""
                 }`}
-                onClick={() => handleSelectContact(contact)}
               >
-                <div className="contact-avatar"></div>
+                <div className="contact-avatar">
+                  {contact.image ? (
+                    <img src={contact.image} alt={`${contact.name}'s avatar`} />
+                  ) : (
+                    <div className="default-avatar">{contact.name[0]}</div>
+                  )}
+                </div>
                 <div className="contact-info">
                   <div className="contact-name">{contact.name}</div>
-                  <div className="contact-status">{contact.status}</div>
+                </div>
+                <div className="last-message-text">
+                  {contact.lastMessageText}
                 </div>
                 <div className="contact-date">
                   {formatDate(contact.lastMessageDate)}
@@ -123,25 +146,36 @@ function Messages() {
             ))}
           </div>
         </div>
-        <div id="chat-header">Conversation with {selectedContact.name}</div>
+        <div id="chat-header">
+          Conversation with {selectedContact && selectedContact.name}
+        </div>
         <div id="chatbox-container">
           <div id="chat-window">
             <div id="chat-messages">
-              {(messages[selectedContact.userId] || []).map(
-                (message, index) => (
-                  <div
-                    key={index}
+              {messages.map((message, index) => {
+                console.log("Message sender:", message.sender);
+                console.log("Current User ID:", currentUserId);
+                console.log("Selected contact ID:", selectedContact?.userId);
+                return (
+                  <div key={index}
                     className={`message ${
-                      message.sender === "Me" ? "sent" : "received"
+                      message.sender === null
+                        ? "received"
+                        : "sent"
                     }`}
                   >
-                    {message.sender !== "Me" && (
-                      <div className="message-avatar"></div>
+                    {message.sender === null && (
+                      <div className="message-avatar">
+                        <div className="message-avatar-text">
+                          {selectedContact.name[0]}
+                        </div>
+                      </div>
                     )}
                     <div className="message-content">{message.message}</div>
                   </div>
-                )
-              )}
+                );
+              })}
+
             </div>
             <div id="chat-input">
               <input
@@ -150,7 +184,10 @@ function Messages() {
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
               />
-              <button onClick={handleSendMessage}>SEND</button>
+              <button onClick={() => handleSendMessage(newMessage)}>
+                SEND
+              </button>
+
             </div>
           </div>
         </div>
