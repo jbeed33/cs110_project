@@ -79,7 +79,7 @@ export default function StudentCard({
   };
   useEffect(() => {
     getReviews();
-  }, []);
+  }, [modalIsOpen]);
 
   function openModal() {
     setIsOpen(true);
