@@ -26,5 +26,5 @@ async function authenticate(req, res, next) {
     return res.json({ msg: "Unauthorized" });
   }
 }
-}
+
 module.exports = { authenticate };
