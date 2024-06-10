@@ -27,7 +27,7 @@ const userSchema = new Schema({
   },
   options: {
     type: String,
-    enum: ["remote", "in person", "both"],
+    enum: ["online", "in person", "both"],
     required: true,
   },
   field: {
@@ -38,6 +38,12 @@ const userSchema = new Schema({
     type: String,
     maxlength: 300,
   },
+  subjectHelp: {
+    type: String,
+    required: true,
+  },
+  messageGroups: [],
+  reviews: [],
 });
 
 module.exports = mongoose.model("user", userSchema, "users");

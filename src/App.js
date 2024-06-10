@@ -1,16 +1,14 @@
 import "./App.css";
 import Navbar from "./components/navbar/Navbar";
 import Dashboard from "./components/dashboard/Dashboard";
-import Login from './components/login/Login';
-import Messages from "./components/messages/Messages";
+import SignUp from "./components/signup/SignUp";
+import Login from "./components/login/Login";
+import AdminPanel from "./components/admin/AdminPanel";
 
 function App() {
   return (
     <div className="App">
-      {/*<Login/> */}
-      <Navbar />
-      <Messages/>
-      {/* <Dashboard /> */}
+      <Login />
     </div>
   );
 }

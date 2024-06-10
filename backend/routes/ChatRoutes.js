@@ -115,6 +115,7 @@ router.post(
       console.log("called createmessage route");
       const groupId = req.params.groupId;
       const sender = req.userId;
+
       const receiver = req.body.receiver;
       const message = req.body.message;
 

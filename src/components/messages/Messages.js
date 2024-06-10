@@ -5,6 +5,7 @@ import Navbar from "../navbar/Navbar";
 
 const API_URL = "http://localhost:8080";
 
+
 const formatDate = (dateString) => {
   const date = new Date(dateString);
   const today = new Date();
@@ -104,6 +105,7 @@ function Messages({ currentUserId }) {
       .catch((error) => {
         console.error("Error sending message:", error);
       });
+
   };
 
   return (
@@ -173,6 +175,7 @@ function Messages({ currentUserId }) {
                   </div>
                 );
               })}
+
             </div>
             <div id="chat-input">
               <input
@@ -184,6 +187,7 @@ function Messages({ currentUserId }) {
               <button onClick={() => handleSendMessage(newMessage)}>
                 SEND
               </button>
+
             </div>
           </div>
         </div>

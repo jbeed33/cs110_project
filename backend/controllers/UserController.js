@@ -24,21 +24,28 @@ async function deleteUser(userId) {
 
 async function updateUser(userId, updatedUser) {
   const filter = { userId };
-  const update = { updatedUser };
 
-  const doc = await User.findOneAndUpdate(filter, update, {
+  const user = await User.findOneAndUpdate(filter, updatedUser, {
     new: true,
   });
+
+  console.log(user);
+
+  if (user) {
+    return user;
+  } else {
+    return null;
+  }
 }
 
-async function createUser(user) {
+async function createUser(user, userID) {
   console.log(user);
   if (user === null) {
     return null;
   }
   try {
     await User.create({
-      userId: user.userId,
+      userId: userID,
       userName: user.userName,
       grade: user.grade,
       type: user.type,
@@ -46,9 +53,20 @@ async function createUser(user) {
       options: user.options,
       field: user.field,
       description: user.description,
+      subjectHelp: user.subjectHelp,
     });
     return "User Created";
   } catch (e) {
+    console.error(e);
+    return null;
+  }
+}
+
+async function getGroupIds(userId) {
+  if (userId) {
+    let foundUser = await User.findOne({ userId: userId });
+    return foundUser;
+  } else {
     return null;
   }
 }

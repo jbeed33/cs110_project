@@ -6,17 +6,24 @@ const { v4: uuidv4 } = require("uuid");
 
 passport.serializeUser((user, done) => {
   console.log("serialized user");
+  user.firstTime = user.newUser ? true : false;
+  console.log(user);
+  console.log(user.id);
+
   done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
   console.log("deserializing user");
+  console.log(id);
   try {
     let user = await AuthModel.findById(id);
     if (!user) {
+      console.log("user not found");
       return done(null, false); // User not found
     }
-    done(null, user); // User found
+    console.log("found user deserilize user");
+    return done(null, user); // User found
   } catch (err) {
     done(err); // Error occurred
   }
@@ -42,10 +49,14 @@ passport.use(
         let newUser = await AuthModel.create({
           googleId: profile.id,
           userId: uuidv4(),
+          image: profile.photos[0].value,
         });
+
+        newUser.newUser = true;
+        console.log("Created new user");
         done(null, newUser);
       }
-      console.log("Profile: ", profile);
+      // console.log("Profile: ", profile);
     }
   )
 );
