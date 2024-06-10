@@ -111,6 +111,7 @@
   top: -30px;
   left: 38px;
   color: #94b2ff;
+  cursor: pointer;
 }
 
 /*  Form/Filter  */
@@ -130,4 +131,7 @@
 }
 .filter-text {
   margin-left: 10px;
+}
+
+.review-card{
 }

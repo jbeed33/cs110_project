@@ -86,7 +86,6 @@ router.post("/", AuthController.authenticate, async (req, res) => {
 //Get all reviews for user
 router.get(
   "/reviews/:receiverId",
-  AuthController.authenticate,
   async (req, res) => {
     try {
       const receiverID = req.params.receiverId;

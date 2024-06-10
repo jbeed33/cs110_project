@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Dashboard.css";
 import Navbar from "../navbar/Navbar";
+import StudentCard from "./StudentCard";
 
 function Dashboard() {
   // State for filter data
@@ -389,36 +390,18 @@ function Dashboard() {
           <h1>Recommended Students</h1>
           <div id="student-list">
             {tutors?.map((tutor, index) => (
-              <div className="student-container" key={index}>
-                <div className="left-student-container">
-                  <img src="#"></img>
-                  <button
-                    data-user={tutor.userId}
-                    onClick={(e) => createMessageGroup(e)}
-                  >
-                    Message
-                  </button>
-                </div>
-                <div className="middle-student-container">
-                  <h2 className="middle-student-title">{tutor.userName}</h2>
-                  <p>{tutor.description}</p>
-                </div>
-                <div className="right-student-container">
-                  <ul>
-                    <li>
-                      <h4>{tutor.field}</h4>
-                    </li>
-                    <li>
-                      <h4>{tutor.school}</h4>
-                    </li>
-                    <li>
-                      <h4>{tutor.grade}</h4>
-                    </li>
-                  </ul>
+              <StudentCard
+                userId={tutor.userId}
+                userName={tutor.userName}
+                desc={tutor.description}
+                field={tutor.field}
+                school={tutor.school}
+                grade={tutor.grade}
+                createMsgGroup={createMessageGroup}
+                key={index}
+              />
 
-                  <h2 className="right-student-review">Reviews</h2>
-                </div>
-              </div>
+              
             ))}
 
             {tutors?.length === 0 ? <div>No Students Found</div> : ""}
