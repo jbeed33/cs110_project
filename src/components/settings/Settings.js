@@ -3,6 +3,9 @@ import "./Settings.css";
 import Navbar from "../navbar/Navbar";
 
 export default function Settings() {
+
+  // Need to be able to update information submitted by user in settings page
+
   return (
     <div>
       <Navbar />
