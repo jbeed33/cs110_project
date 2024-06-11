@@ -54,6 +54,7 @@ The Dashboard consists of a filter section and recommeded user section where the
 
 ### Login Page
 
+<img width="1279" alt="login-page" src="https://github.com/jbeed33/cs110_project/assets/70536517/22bd5902-41e6-48c2-87da-044fe8ea2256">
 
 
 ### Sign-Up
