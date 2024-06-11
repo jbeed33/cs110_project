@@ -51,7 +51,7 @@ This app allows UC students to get paired with other students on campus who feel
 
 **Recommendation System:**
 
-Based on the information we collect about the user, we use a metric to score the potential quality of the student or tutor match. The scoring ranges from 0 (least compatible/able to help the user learn the material) to 5 (most compatible/able to help the user learn the material). We then sort the results, putting the most compatible student at the top of the list and the least compatible student at the bottom, and return that list to the user. As needs change, we can easily fine-tune the recommendation system.
+Based on the information we collect about the user, we use a metric to score the potential quality of the student or tutor match. The scoring ranges from 0 (least compatible/able to help the user learn the material) to 5 (most compatible/able to help the user learn the material). We then sort the results, putting the most compatible student at the top of the list and the least compatible student at the bottom, and return that list to the user. As needs change, we can easily fine-tune the recommendation system. This is used when there are no filters turned on in the filter part of the application.
 
 ## Final Design
 
