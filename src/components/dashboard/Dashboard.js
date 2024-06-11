@@ -399,9 +399,8 @@ function Dashboard() {
                 grade={tutor.grade}
                 createMsgGroup={createMessageGroup}
                 key={index}
+                image={tutor.image || undefined}
               />
-
-              
             ))}
 
             {tutors?.length === 0 ? <div>No Students Found</div> : ""}
