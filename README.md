@@ -116,6 +116,12 @@ This app allows UC students to get paired with other students on campus who feel
 ### Step 4: Start the Backend
 
 1. Navigate to the `backend` directory.
+   
+    ```bash
+    cd backend
+    ```
+    Note: your path should look something like "<path>/cs110-project/backend" now.
+    
 2. Run the following commands to install dependencies and start the backend server:
 
     ```bash
