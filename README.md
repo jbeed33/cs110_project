@@ -59,12 +59,17 @@ The Dashboard consists of a filter section and recommeded user section where the
 
 ### Sign-Up
 
+<img width="1280" alt="sign-up" src="https://github.com/jbeed33/cs110_project/assets/70536517/8eabc933-2ea9-48f5-a6cf-1995b7e0ca6a">
+
 
 ### Settings
+
+<img width="1280" alt="settings page" src="https://github.com/jbeed33/cs110_project/assets/70536517/270ca229-8054-4459-b12b-a4b26e04cf11">
 
 
 ### Dashboard
 
+<img width="1280" alt="dashboard" src="https://github.com/jbeed33/cs110_project/assets/70536517/0b5046b4-191d-4f19-ae94-5e8d4dc79569">
 
 ### Chat Rooms
 
@@ -72,7 +77,7 @@ The Dashboard consists of a filter section and recommeded user section where the
 ### Admin
 
 
-### Ratings & Comments on Tutors
+### Comments on Tutors
 
 
 ## Getting Started With Our Project
