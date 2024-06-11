@@ -1,10 +1,10 @@
-/* Messages.css */
 #messages {
     display: flex;
     width: 99.5%;
     height: 90vh;
     overflow: hidden;
 }
+
 #messages-form-container {
     width: 20%;
     border: 2px solid rgb(0, 229, 255);
@@ -29,12 +29,19 @@
 #sidebar {
     flex-grow: 1;
     overflow-y: auto;
-    
+}
+
+.default-avatar {
+    text-align: center;
+    margin-top: .5em;
+    margin-right: .1em;
 }
 
 .contact {
+    position: relative;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     padding: 20px;
     border: 2px solid #ddd;
     cursor: pointer;
@@ -57,31 +64,41 @@
     background-color: #ccc;
     margin-right: 10px;
     border: 1px solid black;
-    
 }
 
 .contact-info {
     flex-grow: 1;
-    
 }
 
 .contact-name {
     font-size: 20px;
     font-weight: bold;
     color: #333;
-    margin-bottom: 1em;
+    margin-top: -2.4em;
+    margin-left: 2.5em;
+    margin-bottom: 0.5em;
     padding-left: .5em;
 }
 
-.contact-status {
+.last-message-text {
+    position: absolute;
     font-size: 14px;
-    color: #999;
-    margin-top: -1em;
-    padding-left: .75em;
+    color: #666;
+    padding-left: .5em;
+    margin-left: 4em;
+    margin-top: 1.8em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.contact-date{
-    margin-bottom: 3em;
+.contact-date {
+    position: absolute;
+    margin-top: -.2em;
+    margin-left: 20em;
+    font-size: 12px;
+    color: #999;
+    padding-left: .5em;
 }
 
 #chatbox-container {
@@ -102,10 +119,7 @@
     text-align: center;
     margin-top: .6em;
     margin-left: -.9em;
-    
 }
-
-
 
 #chat-window {
     width: 90%;
@@ -117,7 +131,7 @@
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 60px; 
+    margin-top: 60px;
 }
 
 #chat-messages {
@@ -147,6 +161,16 @@
     color: #fff;
 }
 
+.message.sent .message-content{
+    background-color: blue; 
+    text-align: right; 
+  }
+
+.message.received .message-content {
+    background-color: #e5e5ea;
+    color: #333;
+}
+
 .message-avatar {
     width: 40px;
     height: 40px;
@@ -155,10 +179,9 @@
     margin-right: 10px;
     border: 1px solid black;
 }
-
-.message.received .message-content {
-    background-color: #e5e5ea;
-    color: #333;
+.message-avatar-text{
+    margin-left:.8em;
+    margin-top:.5em;
 }
 
 #chat-input {
@@ -175,8 +198,9 @@
     border-radius: 20px;
     margin-right: 10px;
 }
+
 #chat-input input::placeholder {
-    font-size: 20px; 
+    font-size: 20px;
 }
 
 #chat-input button {

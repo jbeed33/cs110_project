@@ -1,80 +1,84 @@
 #settings {
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-#settings-body{
-    background-color: white;
-    border: none;
-    border-radius: 6px;
-    box-shadow: 0 0 10px 1px rgb(124, 124, 124);
-    color: black;
-    font-size: large;
-    margin: 20px;
-    margin-top: 50px;
-    padding: 50px;
-    width: auto;
-    min-width: 10%;
-    max-width: 90%;
+
+#settings-container > * {
+  margin-bottom: 30px;
+}
+#settings-body {
+  background-color: white;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 0 10px 1px rgb(124, 124, 124);
+  color: black;
+  font-size: large;
+  margin: 20px;
+  margin-top: 50px;
+  padding: 50px;
+  width: auto;
+  min-width: 10%;
+  max-width: 90%;
 }
 #settings-container {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 #settings-head {
-    text-align: center;
-    align-self: center;
-    font-weight: bold;
-    font-size: xx-large;
+  text-align: center;
+  align-self: center;
+  font-weight: bold;
+  font-size: xx-large;
 }
 .settings-update {
-    padding: 10px;
+  padding: 10px;
 }
 .settings-text {
-    font-size: 15px;
-    font-weight: bold;
-    color: rgb(83, 83, 83);
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(83, 83, 83);
 }
 
 /* Settings Update Section (LHS) */
 #form {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
 }
 .bar-input {
-    background-color: rgb(233, 233, 233);
-    border: none;
-    padding: 6px;
-    border-radius: 5px;
-    margin: 5px 0 15px 0;
-    box-shadow: 0 0 1px 1px rgb(196, 194, 194);
+  background-color: rgb(233, 233, 233);
+  border: none;
+  padding: 6px;
+  border-radius: 5px;
+  margin: 5px 0 15px 0;
+  box-shadow: 0 0 1px 1px rgb(196, 194, 194);
 }
 .form-btn {
-    width: 150px;
-    align-self: center;
-    margin: 5px;
-    margin-top: 10px;
-    padding: 5px;
-    border: none;
-    border-radius: 20px;
-    background-color: rgb(200, 156, 252);
-    color: white;
-    font-size: 15px;
-  }
-  .box-text {
-    font-size: medium;
-    color: grey;
-  }
-  .form-text {
-    font-size: 13px;
-    font-weight: bold;
-    color: rgb(83, 83, 83);
-  }
-  #form-grade,
-  #form-field-stidy,
-  #form-subject-help #form-school {
-    margin: 5px 0 5px 0;
+  width: 150px;
+  align-self: center;
+  margin: 5px;
+  margin-top: 10px;
+  padding: 5px;
+  border: none;
+  border-radius: 20px;
+  background-color: rgb(200, 156, 252);
+  color: white;
+  font-size: 15px;
+}
+.box-text {
+  font-size: medium;
+  color: grey;
+}
+.form-text {
+  font-size: 13px;
+  font-weight: bold;
+  color: rgb(83, 83, 83);
+}
+#form-grade,
+#form-subject-help,
+#form-school {
+  margin-bottom: 20px;
 }

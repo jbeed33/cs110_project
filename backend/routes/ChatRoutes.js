@@ -111,8 +111,11 @@ router.post(
   AuthController.authenticate,
   async (req, res) => {
     try {
+      console.log(req.userId);
+      console.log("called createmessage route");
       const groupId = req.params.groupId;
-      const sender = req.body.sender;
+      const sender = req.userId;
+
       const receiver = req.body.receiver;
       const message = req.body.message;
 
