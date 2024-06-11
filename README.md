@@ -37,7 +37,7 @@ This app allows UC students to get paired with other students on campus who feel
 
 **Dashboard:**
 
-The Dashboard consists of a filter section and recommeded user section where the user can view students they match with based off of the filter or the recommendation system.
+- The Dashboard consists of a filter section and recommeded user section where the user can view students they match with based off of the filter or the recommendation system.
 
 **Chat Catalog:**
 
@@ -54,24 +54,34 @@ The Dashboard consists of a filter section and recommeded user section where the
 
 ### Login Page
 
+<img width="1279" alt="login-page" src="https://github.com/jbeed33/cs110_project/assets/70536517/22bd5902-41e6-48c2-87da-044fe8ea2256">
 
 
 ### Sign-Up
 
+<img width="1280" alt="sign-up" src="https://github.com/jbeed33/cs110_project/assets/70536517/8eabc933-2ea9-48f5-a6cf-1995b7e0ca6a">
+
 
 ### Settings
+
+<img width="1280" alt="settings page" src="https://github.com/jbeed33/cs110_project/assets/70536517/270ca229-8054-4459-b12b-a4b26e04cf11">
 
 
 ### Dashboard
 
+<img width="1280" alt="dashboard" src="https://github.com/jbeed33/cs110_project/assets/70536517/0b5046b4-191d-4f19-ae94-5e8d4dc79569">
 
 ### Chat Rooms
 
 
 ### Admin
 
+<img width="1276" alt="admin panel" src="https://github.com/jbeed33/cs110_project/assets/70536517/d3fce62b-175f-4454-97f6-79367117ec4a">
 
-### Ratings & Comments on Tutors
+
+### Reviews
+
+<img width="1280" alt="reviews" src="https://github.com/jbeed33/cs110_project/assets/70536517/837c5a4b-ef35-4b87-a1ce-b04ab3681d48">
 
 
 ## Getting Started With Our Project
