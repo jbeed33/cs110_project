@@ -23,11 +23,14 @@ export default function StudentCard({
   school,
   grade,
   createMsgGroup,
+  image,
 }) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [reviews, setReviews] = useState(Array(0).fill(""));
   const [value, setValue] = useState("");
   const [trigger, setTrigger] = useState(false);
+
+  console.log("Image URL:", image);
 
   const onChange = (event) => {
     setValue(event.target.value);
@@ -49,7 +52,7 @@ export default function StudentCard({
       );
       const data = await res.json();
       setReviews(data.reviews);
-    //   console.log(data.reviews);
+      //   console.log(data.reviews);
     } catch (error) {
       console.error("error has occured", error);
     }
@@ -72,7 +75,7 @@ export default function StudentCard({
         }
       );
       const data = await res.json();
-    //   console.log(data);
+      //   console.log(data);
     } catch (error) {
       console.error("error has occured", error);
     }
@@ -91,7 +94,12 @@ export default function StudentCard({
   return (
     <div className="student-container">
       <div className="left-student-container">
-        <img src="#"></img>
+        {image ? (
+          <img src={image} />
+        ) : (
+          <div class="placeholder">{userName[0]}</div>
+        )}
+
         <button data-user={userId} onClick={(e) => createMsgGroup(e)}>
           Message
         </button>
@@ -177,7 +185,7 @@ export default function StudentCard({
             <div
               style={{ display: "flex", flexDirection: "column", gap: "10px" }}
             >
-              <div style={{display:"flex", justifyContent:"space-between"}}>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <label>Add a review</label>
                 <div
                   style={{ cursor: "pointer", color: "blue" }}

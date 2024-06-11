@@ -5,7 +5,6 @@ import Navbar from "../navbar/Navbar";
 
 const API_URL = "http://localhost:8080";
 
-
 const formatDate = (dateString) => {
   const date = new Date(dateString);
   const today = new Date();
@@ -105,7 +104,6 @@ function Messages({ currentUserId }) {
       .catch((error) => {
         console.error("Error sending message:", error);
       });
-
   };
 
   return (
@@ -126,11 +124,11 @@ function Messages({ currentUserId }) {
                     : ""
                 }`}
               >
-                <div className="contact-avatar">
-                  {contact.image ? (
+                <div className="contact-avatar-container ">
+                  {contact.image !== null ? (
                     <img src={contact.image} alt={`${contact.name}'s avatar`} />
                   ) : (
-                    <div className="default-avatar">{contact.name[0]}</div>
+                    <div className="placeholder">{contact.name[0]}</div>
                   )}
                 </div>
                 <div className="contact-info">
@@ -157,25 +155,32 @@ function Messages({ currentUserId }) {
                 console.log("Current User ID:", currentUserId);
                 console.log("Selected contact ID:", selectedContact?.userId);
                 return (
-                  <div key={index}
+                  <div
+                    key={index}
                     className={`message ${
-                      message.sender === null
+                      selectedContact.userId === message.sender
                         ? "received"
                         : "sent"
                     }`}
                   >
-                    {message.sender === null && (
-                      <div className="message-avatar">
-                        <div className="message-avatar-text">
-                          {selectedContact.name[0]}
-                        </div>
+                    {selectedContact.userId === message.sender && (
+                      <div className="message-contact-container ">
+                        {selectedContact.image !== null ? (
+                          <img
+                            src={selectedContact.image}
+                            alt={`${selectedContact.name}'s avatar`}
+                          />
+                        ) : (
+                          <div className="placeholder">
+                            {selectedContact.name[0]}
+                          </div>
+                        )}
                       </div>
                     )}
                     <div className="message-content">{message.message}</div>
                   </div>
                 );
               })}
-
             </div>
             <div id="chat-input">
               <input
@@ -187,7 +192,6 @@ function Messages({ currentUserId }) {
               <button onClick={() => handleSendMessage(newMessage)}>
                 SEND
               </button>
-
             </div>
           </div>
         </div>

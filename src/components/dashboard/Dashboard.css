@@ -59,12 +59,24 @@
   align-items: center;
 }
 
-.left-student-container img {
+.left-student-container img,
+.left-student-container .placeholder {
+  position: relative;
+  top: -20px;
   width: 110px;
   height: 110px;
   margin-bottom: 30px;
   border-radius: 50%;
-  background-color: aquamarine;
+}
+
+.left-student-container .placeholder {
+  background-color: #94e1ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
 }
 
 .left-student-container button {
@@ -115,7 +127,7 @@
 }
 
 /*  Form/Filter  */
-#form-title{
+#form-title {
   color: #94b2ff;
   text-align: center;
 }
@@ -133,5 +145,5 @@
   margin-left: 10px;
 }
 
-.review-card{
+.review-card {
 }

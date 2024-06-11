@@ -1,4 +1,5 @@
 const User = require("../models/UserModel");
+const Auth = require("../models/AuthModel");
 
 async function getUser(userId) {
   const user = await User.findOne({ userId });
@@ -24,6 +25,14 @@ async function deleteUser(userId) {
 
 async function updateUser(userId, updatedUser) {
   const filter = { userId };
+
+  const userAuthInfo = await Auth.findOne({ userId });
+
+  if (userAuthInfo) {
+    updatedUser.image = userAuthInfo.image;
+  }
+
+  console.log("updated user: ", updatedUser);
 
   const user = await User.findOneAndUpdate(filter, updatedUser, {
     new: true,
