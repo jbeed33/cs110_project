@@ -37,7 +37,7 @@ This app allows UC students to get paired with other students on campus who feel
 
 **Dashboard:**
 
-The Dashboard consists of a filter section and recommeded user section where the user can view students they match with based off of the filter or the recommendation system.
+- The Dashboard consists of a filter section and recommeded user section where the user can view students they match with based off of the filter or the recommendation system.
 
 **Chat Catalog:**
 
@@ -80,6 +80,8 @@ The Dashboard consists of a filter section and recommeded user section where the
 
 
 ### Reviews
+
+<img width="1280" alt="reviews" src="https://github.com/jbeed33/cs110_project/assets/70536517/837c5a4b-ef35-4b87-a1ce-b04ab3681d48">
 
 
 ## Getting Started With Our Project
