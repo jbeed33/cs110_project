@@ -49,6 +49,10 @@ This app allows UC students to get paired with other students on campus who feel
 -   Contains user information such as their name, what UC they attend, their chat history, reviews, the subject they need help with the most, their current grade level, whether or not they want to attend a session online or in person, and descriptions of themselves.
 -   The database also contains admin information as well as session information.
 
+**Recommendation System:**
+
+Based on the information we collect about the user, we use a metric to score the potential quality of the student or tutor match. The scoring ranges from 0 (least compatible/able to help the user learn the material) to 5 (most compatible/able to help the user learn the material). We then sort the results, putting the most compatible student at the top of the list and the least compatible student at the bottom, and return that list to the user. As needs change, we can easily fine-tune the recommendation system.
+
 ## Final Design
 
 
