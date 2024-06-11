@@ -76,8 +76,10 @@ The Dashboard consists of a filter section and recommeded user section where the
 
 ### Admin
 
+<img width="1276" alt="admin panel" src="https://github.com/jbeed33/cs110_project/assets/70536517/d3fce62b-175f-4454-97f6-79367117ec4a">
 
-### Comments on Tutors
+
+### Reviews
 
 
 ## Getting Started With Our Project
