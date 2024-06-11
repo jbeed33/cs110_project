@@ -5,7 +5,7 @@
 
 Joshua Beed - I am the Lead Developer for UC Tutors. I helped plan, design, and implement features for the application such as authentication, recommendation system, and message system to name a few. I also designed the database schemas and served as the database administrator. Finally I acted as a solo backend developer and was reponsible for making decisions for the overall system.
 
-Aidan Ching - 
+Aidan Ching - I implemented the dashboard, administrator panel, as well as the review system.
 
 Jason Guan -  I designed the login page and built the messaging system for UC Tutors. I focused on creating a user-friendly login experience and ensuring smooth communication between users.
 
