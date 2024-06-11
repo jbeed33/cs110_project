@@ -15,14 +15,17 @@ router.get("/", AuthController.authenticate, async (req, res) => {
     if (user === null) {
       return res
         .status(404)
-        .json({ message: "Could not retrieve any users. Please try again" });
+        .json({
+          msg: "Could not retrieve any users. Please try again",
+          failed: true,
+        });
     }
     return res.status(200).json(user);
   } catch (error) {
     console.error(error);
     return res
       .status(500)
-      .json({ message: "An error occurred. Please try again" });
+      .json({ message: "An error occurred. Please try again", failed: true });
   }
 });
 

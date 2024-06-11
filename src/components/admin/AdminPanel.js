@@ -16,13 +16,13 @@ export default function AdminPanel() {
       });
       const temp = await res.json();
       console.log("admin data: ", temp);
-      if (temp.msg !== null && temp.msg != "Unauthorized") {
+      if (temp.msg !== null && temp.msg !== "Unauthorized") {
         setData(temp);
       } else {
         alert(
-          "You are not authorized to view this page because you are not admin"
+          "You do not have the correct credentials to view this page or could not retrieve users."
         );
-        window.location.href = "http://localhost:3000";
+        // window.location.href = "http://localhost:3000";
       }
     };
     fetchData().catch(console.error);
