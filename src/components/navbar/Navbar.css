@@ -19,6 +19,14 @@
   font-family: "Inter", sans-serif;
 }
 
+#navbar-image img {
+  position: relative;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
 .navbar-companyname {
   margin: 30px;
   font-weight: 800;
@@ -70,4 +78,41 @@
 .navbar-profile {
   margin-inline: 25px;
   cursor: pointer;
+}
+#profile-list {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background-color: white;
+  color: black;
+  border: 1px solid green;
+  list-style-type: none;
+  margin: 0;
+  padding: 10px 0;
+  width: 200px;
+  box-shadow: 0 4px 8px grey;
+  border-radius: 5px;
+  margin-top: 10px;
+  z-index: 10;
+}
+li {
+  margin: 5px;
+}
+.profile-links {
+  color: black;
+  text-decoration: none;
+}
+.profile-links:hover {
+  background-color: rgb(194, 191, 191);
+}
+#profile-list li {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+#profile-list li:hover {
+  background-color: rgb(194, 191, 191);
+}
+
+#profile-list #logout-color {
+  color: rgb(211, 18, 18);
 }

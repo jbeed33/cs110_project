@@ -7,9 +7,9 @@ Joshua Beed - I am the Lead Developer for UC Tutors. I helped plan, design, and 
 
 Aidan Ching - 
 
-Jason Guan - 
+Jason Guan -  I designed the login page and built the messaging system for UC Tutors. I focused on creating a user-friendly login experience and ensuring smooth communication between users.
 
-Joseph Flores - 
+Joseph Flores - I am the front-end developer for the signup page, the filter, and the settings components. I ensured the styling and the variables communicated across servers were consistent and properly named.
 
 
 ## What is UC Tutors?

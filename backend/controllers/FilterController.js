@@ -10,7 +10,7 @@ async function filter(filters, userID) {
 
 async function recommendationFilter(userID) {
   console.log("user id: ", userID);
-  const user = await User.findOne({ userId: userID });
+  const user = await User.find({ userId: userID });
 
   console.log(user);
 

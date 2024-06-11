@@ -186,11 +186,11 @@ function Messages({ currentUserId }) {
                     : ""
                 }`}
               >
-                <div className="contact-avatar">
-                  {contact.image ? (
+                <div className="contact-avatar-container ">
+                  {contact.image !== null ? (
                     <img src={contact.image} alt={`${contact.name}'s avatar`} />
                   ) : (
-                    <div className="default-avatar">{contact.name[0]}</div>
+                    <div className="placeholder">{contact.name[0]}</div>
                   )}
                 </div>
                 <div className="contact-info">
