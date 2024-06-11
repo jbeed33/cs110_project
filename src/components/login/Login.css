@@ -5,9 +5,9 @@
 }
 .body-image {
   background-image: linear-gradient(
-      0deg,
-      transparent,
-      rgba(156, 215, 229, 0.4) 80%
+      177deg,
+      rgba(10, 231, 243, 0.319) 0%,
+      rgba(105, 55, 255, 0.301) 82%
     ),
     url("loginImage.png");
   height: 100vh;
