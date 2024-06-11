@@ -84,8 +84,6 @@ This app allows UC students to get paired with other students on campus who feel
 <img width="1280" alt="reviews" src="https://github.com/jbeed33/cs110_project/assets/70536517/837c5a4b-ef35-4b87-a1ce-b04ab3681d48">
 
 
-## Getting Started With Our Project
-
 ## Setup Instructions
 
 ### Step 1: Download the Repository
