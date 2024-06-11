@@ -90,21 +90,26 @@ First download the github respository onto your local system.
 
 Next inside the project foler in our directory run the following commands to start the frontend (Please make sure you are in the cs110-project directory before running the command):
 
+```bash
 npm install
 npm install axios
 npm start
+```
+
 
 After that we will start the backend.
 
 Before running the commands you much first create a .env file in the backend folder
 
 Second, you must paste the following code that is in this doc into that file and save. You will have to wait sometime to gain permission to this file.
-https://docs.google.com/document/d/14rPbs5nc9ZmLm78AERuZGk32V3H1XIjZuTvc99qEq5U/edit?usp=sharing
+.env File Info found here: https://docs.google.com/document/d/14rPbs5nc9ZmLm78AERuZGk32V3H1XIjZuTvc99qEq5U/edit?usp=sharing
 
 Next, run the following commands:
 
+```bash
 npm install
 node server.js
+```
 
 If all steps went well, you now have access to UC Tutor!
 
