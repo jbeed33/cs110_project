@@ -9,7 +9,7 @@ Aidan Ching -
 
 Jason Guan - 
 
-Joseph Flores - 
+Joseph Flores - I am the front-end developer for the signup page, the filter, and the settings components. I ensured the styling and the variables communicated across servers were consistent and properly named.
 
 
 ## What is UC Tutors?
