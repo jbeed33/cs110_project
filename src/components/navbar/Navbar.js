@@ -3,7 +3,20 @@ import "./Navbar.css";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 
+
 export default function Navbar() {
+
+  async function Logout() {
+    try {
+      const res = await fetch("http://localhost:8080/api/auth/logout", {credentials: "include", method: "DELETE"});
+      if (res.ok) {
+        window.location.href = "http://localhost:3000";
+      } 
+    } catch(error) {
+      console.log(error);
+    }
+  }
+
   const [isTableVisible, setIsTableVisible] = useState(false);
 
   const toggleTableVisibility = () => {
@@ -33,9 +46,10 @@ export default function Navbar() {
         {isTableVisible && (
           <ul id="profile-list">
             <li><Link className="profile-links" to={"/settings"}>Settings</Link></li>
-            <li>Logout</li>
+            <li onClick={Logout}>Logout</li>
           </ul>
         )}
     </div>
   );
 }
+
