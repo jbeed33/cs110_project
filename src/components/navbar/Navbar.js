@@ -1,32 +1,30 @@
-import React from 'react';
+import React from "react";
 import "./Navbar.css";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-
 export default function Navbar() {
-  
-   const [userImage, setUserImage] = useState("");
-   const [isTableVisible, setIsTableVisible] = useState(false);
-
+  const [userImage, setUserImage] = useState("");
+  const [isTableVisible, setIsTableVisible] = useState(false);
 
   async function Logout() {
     try {
-      const res = await fetch("http://localhost:8080/api/auth/logout", {credentials: "include", method: "DELETE"});
+      const res = await fetch("http://localhost:8080/api/auth/logout", {
+        credentials: "include",
+        method: "DELETE",
+      });
       if (res.ok) {
         window.location.href = "http://localhost:3000";
-      } 
-    } catch(error) {
+      }
+    } catch (error) {
       console.log(error);
     }
   }
- 
+
   const toggleTableVisibility = () => {
     setIsTableVisible(!isTableVisible);
-  }
-
- 
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,7 +38,6 @@ export default function Navbar() {
     };
     fetchData().catch(console.error);
   }, []);
-
 
   return (
     <div className="navbar">
@@ -62,14 +59,19 @@ export default function Navbar() {
         ) : (
           <UserCircleIcon width={40} height="auto" className="navbar-profile" />
         )}
-         {isTableVisible && (
+        {isTableVisible && (
           <ul id="profile-list">
-            <li><Link className="profile-links" to={"/settings"}>Settings</Link></li>
-            <li onClick={Logout}>Logout</li>
+            <li>
+              <Link className="profile-links" to={"/settings"}>
+                <div>Settings</div>
+              </Link>
+            </li>
+            <li onClick={Logout}>
+              <span id="logout-color">Logout</span>
+            </li>
           </ul>
         )}
       </div>
     </div>
   );
 }
-
