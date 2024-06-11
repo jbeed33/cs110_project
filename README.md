@@ -86,31 +86,42 @@ This app allows UC students to get paired with other students on campus who feel
 
 ## Getting Started With Our Project
 
-First download the github respository onto your local system.
+## Setup Instructions
 
-Next inside the project foler in our directory run the following commands to start the frontend (Please make sure you are in the cs110-project directory before running the command):
+### Step 1: Download the Repository
 
-```bash
-npm install
-npm install axios
-npm start
-```
+1. Download the GitHub repository to your local system.
 
+### Step 2: Start the Frontend
 
-After that we will start the backend.
+1. Navigate to the project folder on your local system.
+2. Ensure you are in the `cs110-project` directory.
+3. Run the following commands to install dependencies and start the frontend:
 
-Before running the commands you much first create a .env file in the backend folder
+    ```bash
+    npm install
+    npm install axios
+    npm start
+    ```
 
-Second, you must paste the following code that is in this doc into that file and save. You will have to wait sometime to gain permission to this file.
-.env File Info found here: https://docs.google.com/document/d/14rPbs5nc9ZmLm78AERuZGk32V3H1XIjZuTvc99qEq5U/edit?usp=sharing
+### Step 3: Prepare the Backend
 
-Next, run the following commands:
+1. Create a `.env` file in the `backend` folder.
+2. Paste the content from the provided document into the `.env` file. Note that you may need to request access to the document. 
 
-```bash
-npm install
-node server.js
-```
+    [Access .env File Information](https://docs.google.com/document/d/14rPbs5nc9ZmLm78AERuZGk32V3H1XIjZuTvc99qEq5U/edit?usp=sharing)
 
-If all steps went well, you now have access to UC Tutor!
+### Step 4: Start the Backend
+
+1. Navigate to the `backend` directory.
+2. Run the following commands to install dependencies and start the backend server:
+
+    ```bash
+    npm install
+    node server.js
+    ```
+
+If all steps were followed correctly, you should now have access to UC Tutor!
+
 
 
