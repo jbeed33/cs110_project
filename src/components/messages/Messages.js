@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Messages.css";
 import Navbar from "../navbar/Navbar";
@@ -6,8 +6,6 @@ import Navbar from "../navbar/Navbar";
 const API_URL = "http://localhost:8080";
 
 const formatDate = (dateString) => {
-  if (!dateString) return "";
-
   const date = new Date(dateString);
   const today = new Date();
   const yesterday = new Date(today);
@@ -30,52 +28,30 @@ function Messages({ currentUserId }) {
   const [currentChat, setCurrentChat] = useState("");
   const [currentGroup, setCurrentGroup] = useState("");
 
-  const chatMessagesRef = useRef(null); 
-
   useEffect(() => {
     axios
       .get(`${API_URL}/api/chat/group`, { withCredentials: true })
       .then((response) => {
         const contactsData = response.data.userGroups.map((group) => {
-          const lastMessageDate = group.lastMessage?.publishDate || ""; 
           return {
             userId: group.chatPartner.userId,
             name: group.chatPartner.userName,
             image: group.chatPartner.userImage,
-            lastMessageDate: lastMessageDate ? new Date(lastMessageDate) : null,
+            lastMessageDate: group.lastMessage?.publishDate || "",
             lastMessageText: group.lastMessage?.message || "",
             chatId: group.chatId,
           };
         });
-
-        contactsData.sort((a, b) => {
-          if (!a.lastMessageDate && !b.lastMessageDate) return 0; 
-          if (!a.lastMessageDate) return 1;
-          if (!b.lastMessageDate) return -1; 
-
-          return b.lastMessageDate - a.lastMessageDate;
-        });
-
         setContacts(contactsData);
-        if (contactsData.length > 0) {
-          setSelectedContact(contactsData[0]);
-          setCurrentGroup(contactsData[0].chatId);
-        }
+        setSelectedContact(contactsData[0]);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-
-   
-    const intervalId = setInterval(() => {
-      refreshLastMessage();
-    }, 5000); 
-
-    return () => clearInterval(intervalId);
   }, []);
 
   useEffect(() => {
-    const fetchMessages = () => {
+    const intervalId = setInterval(() => {
       if (currentGroup) {
         axios
           .get(`${API_URL}/api/chat/messages/${currentGroup}`, {
@@ -84,26 +60,12 @@ function Messages({ currentUserId }) {
           .then((response) => {
             console.log("Messages fetched: ", response.data);
             setMessages(response.data);
-          })
-          .catch((error) => {
-            console.error("Error fetching messages:", error);
           });
       }
-    };
-
-    fetchMessages();
-
-    const intervalId = setInterval(fetchMessages, 3000);
+    }, 3000);
 
     return () => clearInterval(intervalId);
   }, [currentGroup]);
-
-
-  useEffect(() => {
-    if (chatMessagesRef.current) {
-      chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight;
-    }
-  }, [messages]);
 
   const handleSelectContact = (e) => {
     const receiver = e.currentTarget.dataset.chatid || null;
@@ -136,36 +98,12 @@ function Messages({ currentUserId }) {
         withCredentials: true,
       })
       .then((response) => {
-        console.log("Sent message:", response.data);
-        console.log("Selected Contact ID:", selectedContact.userId);
         setMessages((prevMessages) => [...prevMessages, response.data]);
         setNewMessage("");
       })
       .catch((error) => {
         console.error("Error sending message:", error);
       });
-  };
-
-  const refreshLastMessage = () => {
-    contacts.forEach((contact) => {
-      axios
-        .get(`${API_URL}/api/chat/messages/${contact.chatId}`, {
-          withCredentials: true,
-        })
-        .then((response) => {
-          const lastMessage = response.data[response.data.length - 1];
-          setContacts((prevContacts) =>
-            prevContacts.map((prevContact) =>
-              prevContact.userId === contact.userId
-                ? { ...prevContact, lastMessageText: lastMessage?.message || "" }
-                : prevContact
-            )
-          );
-        })
-        .catch((error) => {
-          console.error("Error fetching last message:", error);
-        });
-    });
   };
 
   return (
@@ -207,30 +145,42 @@ function Messages({ currentUserId }) {
           </div>
         </div>
         <div id="chat-header">
-          Conversation with {selectedContact ? selectedContact.name : "..."}
+          Conversation with {selectedContact && selectedContact.name}
         </div>
         <div id="chatbox-container">
           <div id="chat-window">
-            <div id="chat-messages" ref={chatMessagesRef}>
-              {messages.map((message, index) => (
-                <div
-                  key={index}
-                  className={`message ${
-                    message.sender === null ? "received" : "sent"
-                  }`}
-                >
-                  {message.sender === null && (
-                    <div className="message-avatar">
-                      <div className="message-avatar-text">
-                        {selectedContact && selectedContact.name[0]}
+            <div id="chat-messages">
+              {messages.map((message, index) => {
+                console.log("Message sender:", message.sender);
+                console.log("Current User ID:", currentUserId);
+                console.log("Selected contact ID:", selectedContact?.userId);
+                return (
+                  <div
+                    key={index}
+                    className={`message ${
+                      selectedContact.userId === message.sender
+                        ? "received"
+                        : "sent"
+                    }`}
+                  >
+                    {selectedContact.userId === message.sender && (
+                      <div className="message-contact-container ">
+                        {selectedContact.image !== null ? (
+                          <img
+                            src={selectedContact.image}
+                            alt={`${selectedContact.name}'s avatar`}
+                          />
+                        ) : (
+                          <div className="placeholder">
+                            {selectedContact.name[0]}
+                          </div>
+                        )}
                       </div>
-                    </div>
-                  )}
-                        <div className="message-content">{message.message}</div>
-                  {console.log("Message sender:", message.sender)}
-                  {console.log("Message receiver:", message.receiver)}
-                </div>
-              ))}
+                    )}
+                    <div className="message-content">{message.message}</div>
+                  </div>
+                );
+              })}
             </div>
             <div id="chat-input">
               <input
@@ -239,7 +189,9 @@ function Messages({ currentUserId }) {
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
               />
-              <button onClick={() => handleSendMessage(newMessage)}>SEND</button>
+              <button onClick={() => handleSendMessage(newMessage)}>
+                SEND
+              </button>
             </div>
           </div>
         </div>
