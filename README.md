@@ -77,6 +77,7 @@ This app allows UC students to get paired with other students on campus who feel
 
 ### Chat Rooms
 
+<img width="1280" alt="message" src="https://github.com/jbeed33/cs110_project/assets/70536517/348a51be-3e8d-4aa9-a421-04a74894662e">
 
 ### Admin
 
