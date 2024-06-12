@@ -13,12 +13,10 @@ router.get("/", AuthController.authenticate, async (req, res) => {
     // TO DO: cookies will be used for authentication
     let user = await adminController.getAllUsers(req.role);
     if (user === null) {
-      return res
-        .status(404)
-        .json({
-          msg: "Could not retrieve any users. Please try again",
-          failed: true,
-        });
+      return res.status(404).json({
+        msg: "Could not retrieve any users. Please try again",
+        failed: true,
+      });
     }
     return res.status(200).json(user);
   } catch (error) {
@@ -51,6 +49,7 @@ router.delete("/:userId", AuthController.authenticate, async (req, res) => {
 
 // Admin can edit a user.
 router.put("/:userId", AuthController.authenticate, async (req, res) => {
+  console.log("Made it her edit");
   try {
     let userId = req.params.userId;
     let result = await userController.updateUser(userId, req.body);

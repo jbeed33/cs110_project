@@ -39,6 +39,7 @@ export default function UserCard({
   const deleteUser = async (id) => {
     const res = await fetch(`http://localhost:8080/api/admin/${id}`, {
       method: "DELETE",
+      credentials: "include",
     });
     return res;
   };
@@ -46,6 +47,7 @@ export default function UserCard({
   const editUser = async (id, formData) => {
     const res = await fetch(`http://localhost:8080/api/admin/${id}`, {
       method: "PUT",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -76,7 +78,9 @@ export default function UserCard({
         <div>{`description: ${description}`}</div>
       </div>
       <div className="modal-button">
-        <button id="open-modal" onClick={openModal}>Edit user</button>
+        <button id="open-modal" onClick={openModal}>
+          Edit user
+        </button>
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
